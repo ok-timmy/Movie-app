@@ -1,21 +1,7 @@
-import {
-  MDBNavbar,
-  MDBNavbarBrand,
-  MDBNavbarNav,
-  MDBNavItem,
-  MDBNavLink,
-  MDBNavbarToggler,
-  MDBCollapse,
-  MDBFormInline,
-  MDBDropdown,
-  MDBDropdownToggle,
-  MDBDropdownMenu,
-  MDBDropdownItem,
-} from "mdbreact";
+import Link from 'next/link'
 //   import React from 'react'
 import Head from "next/head";
 
-const alphabets = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"]
 
 function Header() {
   return (
@@ -52,21 +38,23 @@ function Header() {
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
               <li className="nav-item">
-                <a className="nav-link active" aria-current="page" href="#">
+                <Link href='/' passHref>
+                <a className="nav-link active" aria-current="page">
                   Home
                 </a>
+                </Link>
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="#">
-                  Link
+                <Link href='/favorites' passHref>
+                <a className="nav-link">
+                  Favorite
                 </a>
+                </Link>
               </li>
             </ul>
             <form className="d-flex">
               
-             <select>
-               {alphabets.map((letter)=> {return <option key={letter}>{letter}</option>})}
-             </select>
+            
             </form>
           </div>
         </div>
