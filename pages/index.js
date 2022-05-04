@@ -2,34 +2,6 @@ import Head from "next/head";
 import Link from "next/link";
 import styles from "../styles/Home.module.css";
 
-const alphabets = [
-  "a",
-  "b",
-  "c",
-  "d",
-  "e",
-  "f",
-  "g",
-  "h",
-  "i",
-  "j",
-  "k",
-  "l",
-  "m",
-  "n",
-  "o",
-  "p",
-  "q",
-  "r",
-  "s",
-  "t",
-  "u",
-  "v",
-  "w",
-  "x",
-  "y",
-  "z",
-];
 
 export default function Home() {
   return (
@@ -40,15 +12,6 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div> Hello world</div>
-        {alphabets.map((letter) => {
-          return (
-              <Link href={`/cocktails/${letter}`} key={letter}>
-                <a className='btn btn-primary'>
-                  {letter.toUpperCase()}
-                </a>
-              </Link>
-          );
-        })}
     </div>
   );
 }
