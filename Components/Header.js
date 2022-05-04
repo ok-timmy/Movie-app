@@ -1,7 +1,6 @@
-import Link from 'next/link'
+import Link from "next/link";
 //   import React from 'react'
 import Head from "next/head";
-
 
 function Header() {
   return (
@@ -21,9 +20,11 @@ function Header() {
 
       <nav className="navbar navbar-expand-lg navbar-light bg-info">
         <div className="container-fluid">
-          <a className="navbar-brand" href="#">
-            Navbar
-          </a>
+          <Link href={"/"} passHref>
+            <a className="navbar-brand" href="#">
+              Navbar
+            </a>
+          </Link>
           <button
             className="navbar-toggler"
             type="button"
@@ -38,24 +39,22 @@ function Header() {
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
               <li className="nav-item">
-                <Link href='/' passHref>
-                <a className="nav-link active" aria-current="page">
-                  Home
-                </a>
+                <Link href="/latestmovies" passHref>
+                  <a className="nav-link">Latest Movies</a>
                 </Link>
               </li>
               <li className="nav-item">
-                <Link href='/movies' passHref>
-                <a className="nav-link">
-                  Movies
-                </a>
+                <Link href="/mostpopular" passHref>
+                  <a className="nav-link">Most Popular Movies</a>
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link href="/topmovies" passHref>
+                  <a className="nav-link">Top Movies</a>
                 </Link>
               </li>
             </ul>
-            <form className="d-flex">
-              
-            
-            </form>
+            <form className="d-flex"></form>
           </div>
         </div>
       </nav>
@@ -64,38 +63,3 @@ function Header() {
 }
 
 export default Header;
-
-//   onClick={()=>setToggleCollapse(!toggleCollapse)}
-// isOpen={toggleCollapse}
-// const [toggleCollapse, setToggleCollapse] = useState(false)
-
-// const myHeader = (
-//     <MDBNavbar color="indigo" dark expand="md">
-//       <MDBNavbarBrand>
-//         <strong className="white-text">Navbar</strong>
-//       </MDBNavbarBrand>
-//       {/* <MDBNavbarToggler  /> */}
-//       <MDBCollapse id="navbarCollapse3" navbar>
-//         <MDBNavbarNav left>
-//           <MDBNavItem active>
-//             <MDBNavLink to="#!">Home</MDBNavLink>
-//           </MDBNavItem>
-//           <MDBNavItem>
-//             <MDBNavLink to="#!">Features</MDBNavLink>
-//           </MDBNavItem>
-//           <MDBNavItem>
-//             <MDBNavLink to="#!">Pricing</MDBNavLink>
-//           </MDBNavItem>
-//         </MDBNavbarNav>
-//         <MDBNavbarNav right>
-//           <MDBNavItem>
-//             <MDBFormInline waves>
-//               <div className="md-form my-0">
-//                 <input className="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search" />
-//               </div>
-//             </MDBFormInline>
-//           </MDBNavItem>
-//         </MDBNavbarNav>
-//       </MDBCollapse>
-//     </MDBNavbar>
-//   );

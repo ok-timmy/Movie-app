@@ -1,11 +1,7 @@
 import Image from "next/image";
 
 function Details({ movieDetail }) {
-  // const {items} = movieDetail;
-  console.log(movieDetail);
-  // const {id} = movieDetail;
-  // console.log(myData);
-  // console.log(id)
+  
   const {
     image,
     genreList,
@@ -100,17 +96,17 @@ function Details({ movieDetail }) {
                         <span className="text-muted"> {directors}</span>
                       </p>
 
-                      <div className="col md-6">
-                        <h4>SIMILAR:</h4>
-                        <div className="d-flex flex-wrap">
+                     {similars.length !== 0 && <div className="col md-6">
+                        <h4 className="my-3">SIMILAR:</h4>
+                        <div className="d-flex flex-wrap row">
                           {similars.map((s) => {
-                            return <div key={s.id} className='col'>
-                              <Image src={s.image} alt={s.image} width={250} height={250}/>
+                            return <div key={s.id} className='col-4 col-md- pb-4'>
+                              <Image src={s.image} alt={s.image} width={200} height={200}/>
                               {s.title}
                               </div>;
                           })}
                         </div>
-                      </div>
+                      </div>}
 
                     </div>
                   </div>
@@ -131,30 +127,17 @@ export async function getStaticPaths() {
     "https://imdb-api.com/en/API/MostPopularMovies/k_5cpyi6x9"
   );
   const { items } = await resp.json();
-  // console.log(items);
 
   const paths = items.map((item) => {
-    //  const obejct = {id: `${item.id}`, title: `${item.title}`}
-    //  const strObj = JSON.stringify(obejct);
     return {
       params: {
         details: `${item.fullTitle}/k_5cpyi6x9/${item.id}`,
         id: `${item.id}`,
-        // id : `${item.id}`,
-        // title : `${item.title}`
       },
     };
   });
-  // console.log(paths);
+
   return {
-    // paths: [
-    //     {
-    //         params: {
-    //             details: 'ABC'
-    //         }
-    //     }
-    // ],
-    //     fallback : true
     paths,
     fallback: true,
   };
@@ -162,8 +145,6 @@ export async function getStaticPaths() {
 
 export async function getStaticProps(context) {
   const { params } = context;
-  // const param = JSON.parse(params.details)
-  // console.log(params);
   const { details } = params;
   const detailsArray = details.split("+");
   console.log(detailsArray);

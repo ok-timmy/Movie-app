@@ -17,7 +17,7 @@ const index = ({ movies }) => {
       </Head>
 
       <div>
-        <h2 className="mt-4 mx-3 mx-md-5 px-md-3">Most Popular Movies</h2>
+        <h2 className="mt-4 mx-3 mx-md-5 px-md-3">Top 250 Movies</h2>
 
         <div className="container mt-5 mx-auto">
           <div className="row">
@@ -34,10 +34,9 @@ const index = ({ movies }) => {
                       height={270}
                     />
                     <div className="card-body">
-                      <h5 className="card-title">{item.title}</h5>
+                      <h5 className="card-title">{item.fullTitle}</h5>
                       <p className="card-text">{item.year}</p>
-                      <p className="card-text">{item.imDbRating}</p>
-                      <Link href={`/mostpopular/${item.fullTitle}+${item.id}`}>
+                      <Link href={`/topmovies/${item.fullTitle}+${item.id}`}>
                         <a className="btn btn-light">View Details</a>
                       </Link>{" "}
                     </div>
@@ -56,7 +55,7 @@ export default index;
 
 export async function getStaticProps() {
   const resp = await fetch(
-    "https://imdb-api.com/en/API/MostPopularTVs/k_5cpyi6x9"
+    "https://imdb-api.com/en/API/Top250TVs/k_5cpyi6x9"
   );
   const data = await resp.json();
   // console.log(data);

@@ -2,10 +2,9 @@ import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
 
-
 const index = ({ movies }) => {
   const { items } = movies;
-  
+
   return (
     <>
       <Head>
@@ -18,33 +17,27 @@ const index = ({ movies }) => {
       </Head>
 
       <div>
-        <h2>Top 250 Movies</h2>
+        <h2 className="mt-4 mx-3 mx-md-5 px-md-3">Top 250 Movies</h2>
 
-        <div className="container mt-5">
+        <div className="container mt-5 mx-auto">
           <div className="row">
             {items.map((item) => {
               return (
                 <div key={item.id} className="col">
-                  <div className="card mb-3" style={{ width: "18rem" }}>
+                  <div className="card mb-3" style={{ width: "20rem" }}>
                     <Image
-                    responsive={'100vw'}
+                      responsive={"100vw"}
                       src={item.image}
                       className="card-img-top"
                       alt="..."
-                      width={50}
-                      height={250}
+                      width={60}
+                      height={270}
                     />
                     <div className="card-body">
                       <h5 className="card-title">{item.fullTitle}</h5>
-                      <p className="card-text">
-                        {item.year}
-                      </p>
-                      <Link href={`/movies/${item.fullTitle}+${item.id}`}>
-                      <a
-                        className="btn btn-primary"
-                      >
-                        View Details
-                      </a>
+                      <p className="card-text">{item.year}</p>
+                      <Link href={`/latestmovies/${item.fullTitle}+${item.id}`}>
+                        <a className="btn btn-light">View Details</a>
                       </Link>{" "}
                     </div>
                   </div>
@@ -61,9 +54,8 @@ const index = ({ movies }) => {
 export default index;
 
 export async function getStaticProps() {
-
   const resp = await fetch(
-    'https://imdb-api.com/en/API/MostPopularMovies/k_5cpyi6x9'
+    "https://imdb-api.com/en/API/MostPopularMovies/k_5cpyi6x9"
   );
   const data = await resp.json();
   // console.log(data);
@@ -72,27 +64,3 @@ export async function getStaticProps() {
     props: { movies: data },
   };
 }
-
-
-
-// export async function getStaticPaths() {
- 
-//   const resp = await fetch(
-//     'https://imdb-api.com/en/API/Top250TVs/k_5cpyi6x9'
-//   );
-//   const { items } = await resp.json();
-//   console.log(items);
-
-//   const paths = items.map((item) => {
-//     return {
-//       params: {
-//         details: `${item.title}`,
-//       },
-//     };
-//   });
-
-//   return {
-//     paths,
-//     fallback: true,
-//   };
-// }
