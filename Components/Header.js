@@ -45,9 +45,9 @@ function Header() {
                 </Link>
               </li>
               <li className="nav-item">
-                <Link href='/favorites' passHref>
+                <Link href='/movies' passHref>
                 <a className="nav-link">
-                  Favorite
+                  Movies
                 </a>
                 </Link>
               </li>

@@ -39,7 +39,7 @@ const index = ({ movies }) => {
                       <p className="card-text">
                         {item.year}
                       </p>
-                      <Link href={`/movies/${item.title}+${item.id}`}>
+                      <Link href={`/movies/${item.fullTitle}+${item.id}`}>
                       <a
                         className="btn btn-primary"
                       >
@@ -66,7 +66,7 @@ export async function getStaticProps() {
     'https://imdb-api.com/en/API/MostPopularMovies/k_5cpyi6x9'
   );
   const data = await resp.json();
-  console.log(data);
+  // console.log(data);
 
   return {
     props: { movies: data },

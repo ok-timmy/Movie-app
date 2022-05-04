@@ -1,57 +1,117 @@
 import Image from "next/image";
 
-function Details( movieDetail ) {
+function Details({ movieDetail }) {
   // const {items} = movieDetail;
-  console.log(movieDetail)
+  console.log(movieDetail);
+  // const {id} = movieDetail;
+  // console.log(myData);
+  // console.log(id)
+  const {
+    image,
+    genreList,
+    countries,
+    directors,
+    keywordList,
+    similars,
+    starList,
+    actorList,
+    year,
+    writerList,
+    plot,
+    runtimeStr,
+    languages,
+    imDbRating,
+  } = movieDetail;
+
+  const slicedActorList = actorList.slice(0, 5);
 
   return (
     <>
-      <section className="h-100 bg-success">
-        <div className="container h-100 px-5">
+      <section className="h-100 bg-light">
+        <div className="container h-auto px-2">
           <div className="row d-flex justify-content-center align-items-center h-100">
             <div className="col">
-              <div className="card card-registration my-4">
+              <div className="card card-registration my-2">
                 <div className="row g-0">
                   <div className="col-xl-6 d-xl-block">
-                    {/* <Image
-                      src={movieDetail.image}
+                    <Image
+                      src={image}
                       alt="Sample photo"
-                      width={500}
-                      height={500}
+                      width={"550"}
+                      height={"550"}
                       className="img-fluid"
-                    /> */}
+                    />
                   </div>
-                  <div className="col-xl-6">
+                  <div className="col-xl-6 overflow-scroll-y">
                     <div className="card-body  text-black">
-                      <h3 className="mb-3 text-uppercase">
-                        {movieDetail.fullTitle}
-                      </h3>
-
-                      {/* <div className="col md-6">
-                        <h4>INGREDIENTS:</h4>
+                      <h2 className=" text-uppercase">{movieDetail.title}</h2>
+                      <p className="text-muted">
+                        <span>
+                          {year} /{" "}
+                          {genreList.map((g) => {
+                            return <span key={g.key}>{g.value} / </span>;
+                          })}
+                        </span>
+                        <span>{runtimeStr}</span>
+                      </p>
+                      <p>
+                        Rating: <span>{imDbRating}</span>
+                      </p>
+                      <div className="col">
+                        <h4>THE CAST</h4>
+                        <div className="row">
+                          {slicedActorList.map((star) => {
+                            return (
+                              <div key={star.id} className="col mb-3">
+                                <Image
+                                  src={star.image}
+                                  alt={star.image}
+                                  width={100}
+                                  height={100}
+                                  style={{ borderRadius: "50%" }}
+                                />
+                                <span
+                                  className="d-flex justify-content-center"
+                                  style={{ fontSize: "10px" }}
+                                >
+                                  {star.name}
+                                </span>
+                              </div>
+                            );
+                          })}
+                        </div>
+                      </div>
+                      <div className="col">
+                        <h3>SYNOPSIS</h3>
+                        <p className="text-muted" style={{ fontSize: "15px" }}>
+                          {plot}
+                        </p>
                       </div>
 
-                      <div className="col-md-6 mb-4">
+                      <p>
+                        {" "}
+                        Languages:
+                        <span className="text-muted"> {languages}</span>
+                      </p>
 
-                        <div className="col">
-                          <p>Category: <span>}</span></p>
-                        </div>
-                        <div className="col">
-                          <p>Alcoholic: <span>{myDrinks.strAlcoholic}</span></p>
-                        </div>
-                      </div>
+                      <p>
+                        {" "}
+                        Directors:
+                        <span className="text-muted"> {directors}</span>
+                      </p>
 
                       <div className="col md-6">
-                        <h4>METHODS:</h4>
+                        <h4>SIMILAR:</h4>
+                        <div className="d-flex flex-wrap">
+                          {similars.map((s) => {
+                            return <div key={s.id} className='col'>
+                              <Image src={s.image} alt={s.image} width={250} height={250}/>
+                              {s.title}
+                              </div>;
+                          })}
+                        </div>
                       </div>
 
-                      <div className="col mb-4">
-                        <ul>
-                          {myDrinks.strIngredient1 && (
-                            <li> {myDrinks.strInstructions}</li>
-                          )}
-                          </ul>
-                          </div> */}
                     </div>
                   </div>
                 </div>
@@ -74,18 +134,18 @@ export async function getStaticPaths() {
   // console.log(items);
 
   const paths = items.map((item) => {
-  //  const obejct = {id: `${item.id}`, title: `${item.title}`}
-  //  const strObj = JSON.stringify(obejct);
+    //  const obejct = {id: `${item.id}`, title: `${item.title}`}
+    //  const strObj = JSON.stringify(obejct);
     return {
       params: {
-        details: `${item.title}/k_5cpyi6x9/${item.id}`,
-        id: `${item.id}`
+        details: `${item.fullTitle}/k_5cpyi6x9/${item.id}`,
+        id: `${item.id}`,
         // id : `${item.id}`,
         // title : `${item.title}`
       },
     };
   });
-// console.log(paths);
+  // console.log(paths);
   return {
     // paths: [
     //     {
@@ -104,10 +164,11 @@ export async function getStaticProps(context) {
   const { params } = context;
   // const param = JSON.parse(params.details)
   // console.log(params);
-  const {details} = params;
-  const detailsArray = details.split('+');
+  const { details } = params;
+  const detailsArray = details.split("+");
+  console.log(detailsArray);
   const response = await fetch(
-    `https://imdb-api.com/en/API/${detailsArray[0]}/k_5cpyi6x9/${detailsArray[1]}`
+    `https://imdb-api.com/en/API/Title/k_5cpyi6x9/${detailsArray[1]}`
   );
   const data = await response.json();
   console.log(data);
