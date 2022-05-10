@@ -1,8 +1,34 @@
 import Link from "next/link";
-//   import React from 'react'
 import Head from "next/head";
+import styled from "styled-components";
 
 function Header() {
+  const HeaderWrapper = styled.div`
+    width: 100vw;
+    height: 12vh;
+    background-color: #f5f5f5;
+  `;
+  
+  const MainHeader = styled.div`
+    padding: 0.5rem 2rem;
+    display: flex;
+    justify-content: space-between;
+  `;
+  
+  const NavList = styled.ul`
+    display: flex;
+    justify-content: space-between;
+    list-style: none;
+  `;
+  
+  const NavLinks = styled.li`
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-right:20px;
+  `;
+
   return (
     <>
       <Head>
@@ -15,49 +41,50 @@ function Header() {
           integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
           crossOrigin="anonymous"
         ></link>
-        {/* <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossOrigin="anonymous"></script> */}
+        <link
+          rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css"
+        ></link>
       </Head>
 
-      <nav className="navbar navbar-expand-lg navbar-light bg-info">
-        <div className="container-fluid">
+      <HeaderWrapper>
+        <MainHeader>
           <Link href={"/"} passHref>
             <a className="navbar-brand" href="#">
               Navbar
             </a>
           </Link>
-          <button
-            className="navbar-toggler"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-          >
-            <span className="navbar-toggler-icon"></span>
-          </button>
-          <div className="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-              <li className="nav-item">
-                <Link href="/latestmovies" passHref>
-                  <a className="nav-link">Latest Movies</a>
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link href="/mostpopular" passHref>
-                  <a className="nav-link">Most Popular Movies</a>
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link href="/topmovies" passHref>
-                  <a className="nav-link">Top Movies</a>
-                </Link>
-              </li>
-            </ul>
-            <form className="d-flex"></form>
-          </div>
-        </div>
-      </nav>
+          <NavList>
+            <NavLinks>
+              <i className="bi bi-star"></i>
+              <Link href="/latestmovies" passHref>
+                <a className="nav-link">Latest Movies</a>
+              </Link>
+            </NavLinks>
+            <NavLinks>
+              <i className="bi bi-camera-reels"></i>
+              <Link href="/mostpopular" passHref>
+                <a className="nav-link">Most Popular Movies</a>
+              </Link>
+            </NavLinks>
+            <NavLinks>
+              <i className="bi bi-film"></i>
+              <Link href="/topmovies" passHref>
+                <a className="nav-link">Top Movies</a>
+              </Link>
+            </NavLinks>
+          </NavList>
+
+          <NavList>
+            <NavLinks>
+              <Link href="/account/sign-in">Sign In</Link>
+            </NavLinks>
+            <NavLinks>
+              <Link href="/account/sign-up">Sign Up</Link>
+            </NavLinks>
+          </NavList>
+        </MainHeader>
+      </HeaderWrapper>
     </>
   );
 }
