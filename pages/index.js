@@ -2,7 +2,7 @@ import Head from "next/head";
 import Link from "next/link";
 import Image from "next/image";
 import styles from "../styles/Home.module.css";
-import '../src/config/firebase.config'
+import '../src/config/firebase.config';
 
 export default function Home() {
   const brandImages = [
