@@ -1,13 +1,16 @@
 import Link from "next/link";
 import Head from "next/head";
 import styled from "styled-components";
+import { useEffect, useState } from "react";
+import { useRouter } from "next/router";
+import { getAuth, signOut } from "firebase/auth";
 
 const HeaderWrapper = styled.div`
   width: 100vw;
   height: 12vh;
   background-color: #f5f5f5;
   position: fixed;
-  top:0;
+  top: 0;
   z-index: 1000;
 `;
 
@@ -28,9 +31,32 @@ const NavLinks = styled.li`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding-right:20px;
+  padding-right: 20px;
 `;
+
 function Header() {
+  const [tokenExist, setTokenExist] = useState(false);
+  const router = useRouter();
+
+  useEffect(() => {
+    const token = sessionStorage.getItem("Token");
+    if (token) {
+      setTokenExist(true);
+      // router.reload(window.location.pathname);
+    }
+  }, []);
+
+  const logout = () => {
+    const auth = getAuth();
+    signOut(auth)
+      .then(() => {
+        console.log("Log out Successful");
+        sessionStorage.removeItem("Token");
+      })
+      .catch((error) => {
+        // An error happened.
+      });
+  };
 
   return (
     <>
@@ -78,14 +104,25 @@ function Header() {
             </NavLinks>
           </NavList>
 
-          <NavList>
-            <NavLinks>
-              <Link href="/account/sign-in">Sign In</Link>
-            </NavLinks>
-            <NavLinks>
-              <Link href="/account/sign-up">Sign Up</Link>
-            </NavLinks>
-          </NavList>
+          {!tokenExist ? (
+            <NavList>
+              <NavLinks>
+                <Link href="/account/sign-in">Sign In</Link>
+              </NavLinks>
+              <NavLinks>
+                <Link href="/account/sign-up">Sign Up</Link>
+              </NavLinks>
+            </NavList>
+          ) : (
+            <NavList>
+              <NavLinks>
+                <button onClick={logout()}>Sign out</button>
+              </NavLinks>
+              <NavLinks>
+                <Link href="/account/sign-up">Profile</Link>
+              </NavLinks>
+            </NavList>
+          )}
         </MainHeader>
       </HeaderWrapper>
     </>

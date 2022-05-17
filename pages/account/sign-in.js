@@ -1,8 +1,75 @@
 import firebase from "../../src/config/firebase.config";
+import {
+  getAuth,
+  signInWithEmailAndPassword,
+  GoogleAuthProvider,
+  signInWithPopup
+} from "firebase/auth";
+import { useEffect, useState } from "react";
+import { useRouter } from "next/router";
+import Link from "next/link";
 
-function signIn() {
+function SignIn() {
+  const router = useRouter();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const signIn = () => {
+    const auth = getAuth();
+    signInWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        // Signed in
+        const user = userCredential.user;
+        sessionStorage.setItem('Token', response.user.accessToken)
+        console.log(user);
+        // router.reload(window.location.pathname);
+        router.back();
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+      });
+  };
+
+  const signInWithGoogle = () => {
+    const provider = new GoogleAuthProvider();
+
+    const auth = getAuth();
+    signInWithPopup(auth, provider)
+      .then((result) => {
+        // This gives you a Google Access Token. You can use it to access the Google API.
+        const credential = GoogleAuthProvider.credentialFromResult(result);
+        const token = credential.accessToken;
+        // The signed-in user info.
+        const user = result.user;
+        console.log(user);
+        sessionStorage.setItem('Token', user.accessToken)
+        // router.push("/");
+        router.back();
+      })
+      .catch((error) => {
+        // Handle Errors here.
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        // The email of the user's account used.
+        const email = error.email;
+        // The AuthCredential type that was used.
+        const credential = GoogleAuthProvider.credentialFromError(error);
+        // ...
+      });
+  };
+
+  useEffect(() => {
+    const token = sessionStorage.getItem("Token");
+
+    if(token) {
+      router.push('/')
+    }
+  }, [])
+  
+
   return (
-    <section className="vh-100" style={{backgroundColor: "white"}}>
+    <section className="vh-100 py-5" style={{ backgroundColor: "white" }}>
       <div className="container py-5 h-100">
         <div className="row d-flex justify-content-center align-items-center h-100">
           <div className="col-12 col-md-8 col-lg-6 col-xl-5">
@@ -10,11 +77,11 @@ function signIn() {
               className="card bg-dark text-white"
               style={{ borderRadius: "1rem" }}
             >
-              <div className="card-body p-5 text-center">
-                <div className="mb-md-2 mt-md-4 pb-2">
+              <div className="card-body px-5 text-center">
+                <div className="mb-md-2 pb-2">
                   <h2 className="fw-bold mb-2 text-uppercase">Login</h2>
                   <p className="text-white-50 mb-5">
-                    Please enter your login and password!
+                    Please enter your email and password!
                   </p>
 
                   <div className="form-floating mb-3">
@@ -22,9 +89,13 @@ function signIn() {
                       type="email"
                       className="form-control"
                       id="floatingInput"
-                      placeholder="name@example.com"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      placeholder='email'
                     />
-                    <label htmlFor="floatingInput">Email address</label>
+                    <label htmlFor="floatingInput" className="text-black">
+                      Email address
+                    </label>
                   </div>
 
                   <div className="form-floating">
@@ -32,9 +103,13 @@ function signIn() {
                       type="password"
                       className="form-control"
                       id="floatingPassword"
-                      placeholder="Password"
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                      placeholder="password"
                     />
-                    <label htmlFor="floatingPassword">Password</label>
+                    <label htmlFor="floatingPassword" className="text-black">
+                      Password
+                    </label>
                   </div>
 
                   <p className="small mb-1 pb-lg-2">
@@ -46,14 +121,19 @@ function signIn() {
                   <button
                     className="btn btn-outline-light btn-lg px-5"
                     type="submit"
+                    onClick={signIn()}
                   >
                     Login
                   </button>
 
                   <div className="d-flex justify-content-center text-center mt-2 pt-1">
-                    <a href="#!" className="text-white">
+                    <button
+                    type="button"
+                      className="btn btn-light"
+                      onClick={() => signInWithGoogle()}
+                    >
                       <i className="bi bi-google"></i>
-                    </a>
+                    </button>
                     <a href="#!" className="text-white">
                       <i className="bi bi-twitter mx-4 px-2"></i>
                     </a>
@@ -66,9 +146,9 @@ function signIn() {
                 <div>
                   <p className="mb-0">
                     Don&apos;t have an account?{" "}
-                    <a href="#!" className="text-white-50 fw-bold">
+                    <Link href={'/account/sign-up'} className="text-white-50 fw-bold">
                       Sign Up
-                    </a>
+                    </Link>
                   </p>
                 </div>
               </div>
@@ -80,4 +160,4 @@ function signIn() {
   );
 }
 
-export default signIn;
+export default SignIn;

@@ -3,6 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import styles from "../styles/Home.module.css";
 import '../src/config/firebase.config';
+import { useRouter } from "next/router";
 
 export default function Home() {
   const brandImages = [
@@ -15,6 +16,8 @@ export default function Home() {
     {name: "/../public/sony.png"},
     {name: "/../public/paramount.png"},
   ];
+
+  const router = useRouter();
 
   return (
     <div className={styles.container}>
@@ -33,8 +36,8 @@ export default function Home() {
               scrambled it to make a type specimen book. It has survived not
               only five centuries.
             </p>
-            <button type="button" className="btn btn-primary">
-              <Link href={"/latestmovies"}>Explore</Link>
+            <button type="button" className="btn btn-primary" onClick={()=>router.push('/latestmovies')}>
+              Explore
             </button>
           </div>
           <Image

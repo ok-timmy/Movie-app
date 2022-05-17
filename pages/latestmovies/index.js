@@ -1,9 +1,18 @@
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
+import { doc, updateDoc } from "firebase/firestore";
+import  {db} from "../../src/config/firebase.config";
 
 const index = ({ movies }) => {
   const { items } = movies;
+
+  const addToFavourites = async(mov) => {
+    const washingtonRef = doc(db, "users", "oktimmy45@gmail.com");
+    await updateDoc(washingtonRef, {
+      favouriteMovies: [ mov]
+    });
+  }
 
   return (
     <>
@@ -39,6 +48,7 @@ const index = ({ movies }) => {
                       <Link href={`/latestmovies/${item.fullTitle}+${item.id}`}>
                         <a className="btn btn-light">View Details</a>
                       </Link>{" "}
+                      <button onClick={()=>addToFavourites(item)}>Add To favourites</button>
                     </div>
                   </div>
                 </div>
