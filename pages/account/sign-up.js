@@ -1,22 +1,18 @@
 import { useState } from "react";
-import {
-  getAuth,
-  createUserWithEmailAndPassword,
-  signInWithPopup,
-  GoogleAuthProvider,
-} from "firebase/auth";
-import { doc, setDoc } from "firebase/firestore"; 
-import { useRouter } from "next/router";
 import  {app, db} from "../../src/config/firebase.config";
 import Link from "next/link";
+import { SignUpWithEmail, SignedUpWithGoogle } from "../../src/auth/auth";
+import { useRouter } from "next/router";
+
+
 
 export default function SignUp() {
-  const router = useRouter();
-  const auth = getAuth();
   const [isDisabled, setIsDisabled] = useState(true)
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("")
+
+  const router = useRouter();
 
   const onCheck = (e) => {
     const checked = e.target.checked;
@@ -28,59 +24,7 @@ export default function SignUp() {
     }
   }
 
-  const provider = new GoogleAuthProvider();
 
-  const adduser = async(n, e, img) => {
-    await setDoc(doc(db, "users", e), {
-      name: n,
-      email: e,
-      profilePicture: img || "",
-      favouritesMovies: [],
-    });
-  }
-
-  const signedUp = () => {
-    createUserWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        // Signed in
-        // const user = userCredential.user;
-        console.log(userCredential);
-         adduser(name, email);
-        //  sessionStorage.setItem("Token", userCredential.accessToken);
-        //  router.reload(window.location.pathname);
-        router.push("/sign-in");
-      })
-      .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        // ..
-      });
-  };
-
-  const signedUpWithGoogle = () => {
-    const auth = getAuth();
-    signInWithPopup(auth, provider)
-      .then((result) => {
-        // This gives you a Google Access Token. You can use it to access the Google API.
-        const credential = GoogleAuthProvider.credentialFromResult(result);
-        const token = credential.accessToken;
-        // The signed-in user info.
-        const user = result.user;
-        console.log(user);
-        adduser(user.displayName, user.email, user.photoURL);
-        // ...
-      })
-      .catch((error) => {
-        // Handle Errors here.
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        // The email of the user's account used.
-        const email = error.email;
-        // The AuthCredential type that was used.
-        const credential = GoogleAuthProvider.credentialFromError(error);
-        // ...
-      });
-  };
 
   return (
     <section className="h-100 py-5 mt-5">
@@ -173,7 +117,7 @@ export default function SignUp() {
                         type="button"
                         className="btn btn-success btn-block btn-lg gradient-custom-4 text-body"
                         onClick={() => {
-                          signedUp();
+                          SignUpWithEmail(email, password, router);
                         }}
                         disabled={isDisabled}
                       >
@@ -194,7 +138,7 @@ export default function SignUp() {
                       type="button"
                       className="btn btn-light"
                       style={{ color: "red" }}
-                      onClick={() => signedUpWithGoogle()}
+                      onClick={() => SignedUpWithGoogle(router)}
                      disabled={isDisabled}
                     >
                       <i className="bi bi-google"></i>

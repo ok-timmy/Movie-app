@@ -116,7 +116,7 @@ function Header() {
           ) : (
             <NavList>
               <NavLinks>
-                <button onClick={logout()}>Sign out</button>
+                <button onClick={()=>logout()}>Sign out</button>
               </NavLinks>
               <NavLinks>
                 <Link href="/account/sign-up">Profile</Link>

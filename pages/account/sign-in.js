@@ -1,72 +1,21 @@
-import firebase from "../../src/config/firebase.config";
-import {
-  getAuth,
-  signInWithEmailAndPassword,
-  GoogleAuthProvider,
-  signInWithPopup
-} from "firebase/auth";
 import { useEffect, useState } from "react";
-import { useRouter } from "next/router";
 import Link from "next/link";
+import { SignInWithEmail, SignInWithGoogle } from "../../src/auth/auth";
+import { useRouter } from "next/router";
 
 function SignIn() {
-  const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const signIn = () => {
-    const auth = getAuth();
-    signInWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        // Signed in
-        const user = userCredential.user;
-        sessionStorage.setItem('Token', response.user.accessToken)
-        console.log(user);
-        // router.reload(window.location.pathname);
-        router.back();
-      })
-      .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-      });
-  };
-
-  const signInWithGoogle = () => {
-    const provider = new GoogleAuthProvider();
-
-    const auth = getAuth();
-    signInWithPopup(auth, provider)
-      .then((result) => {
-        // This gives you a Google Access Token. You can use it to access the Google API.
-        const credential = GoogleAuthProvider.credentialFromResult(result);
-        const token = credential.accessToken;
-        // The signed-in user info.
-        const user = result.user;
-        console.log(user);
-        sessionStorage.setItem('Token', user.accessToken)
-        // router.push("/");
-        router.back();
-      })
-      .catch((error) => {
-        // Handle Errors here.
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        // The email of the user's account used.
-        const email = error.email;
-        // The AuthCredential type that was used.
-        const credential = GoogleAuthProvider.credentialFromError(error);
-        // ...
-      });
-  };
+  const router = useRouter();
 
   useEffect(() => {
     const token = sessionStorage.getItem("Token");
 
-    if(token) {
-      router.push('/')
+    if (token) {
+      router.push("/");
     }
-  }, [])
-  
+  }, []);
 
   return (
     <section className="vh-100 py-5" style={{ backgroundColor: "white" }}>
@@ -91,7 +40,7 @@ function SignIn() {
                       id="floatingInput"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
-                      placeholder='email'
+                      placeholder="email"
                     />
                     <label htmlFor="floatingInput" className="text-black">
                       Email address
@@ -120,17 +69,20 @@ function SignIn() {
 
                   <button
                     className="btn btn-outline-light btn-lg px-5"
-                    type="submit"
-                    onClick={signIn()}
+                    type="button"
+                    onClick={() => {
+                      SignInWithEmail(email, password, router),
+                        console.log("btn clicked");
+                    }}
                   >
                     Login
                   </button>
 
                   <div className="d-flex justify-content-center text-center mt-2 pt-1">
                     <button
-                    type="button"
+                      type="button"
                       className="btn btn-light"
-                      onClick={() => signInWithGoogle()}
+                      onClick={() => SignInWithGoogle(router)}
                     >
                       <i className="bi bi-google"></i>
                     </button>
@@ -146,7 +98,10 @@ function SignIn() {
                 <div>
                   <p className="mb-0">
                     Don&apos;t have an account?{" "}
-                    <Link href={'/account/sign-up'} className="text-white-50 fw-bold">
+                    <Link
+                      href={"/account/sign-up"}
+                      className="text-white-50 fw-bold"
+                    >
                       Sign Up
                     </Link>
                   </p>

@@ -1,18 +1,34 @@
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
-import { doc, updateDoc } from "firebase/firestore";
-import  {db} from "../../src/config/firebase.config";
+import { doc, getDoc, updateDoc } from "firebase/firestore";
+import { db } from "../../src/config/firebase.config";
+import { useEffect, useState } from "react";
 
-const index = ({ movies }) => {
+const Index = ({ movies }) => {
+  const [loggedInEmail, setLoggedInEmail] = useState("")
   const { items } = movies;
 
-  const addToFavourites = async(mov) => {
-    const washingtonRef = doc(db, "users", "oktimmy45@gmail.com");
+  useEffect(() => {
+    const activeUser = sessionStorage.getItem("User");
+    setLoggedInEmail(activeUser);
+    console.log(activeUser);
+  }, [])
+  
+
+  const addToFavourites = async (mov) => {
+    const docRef = doc(db, "users", loggedInEmail);
+    const docSnap = await getDoc(docRef);
+    const prevMovies = docSnap.data();
+    const existingFaves = prevMovies.favouriteMovies;
+    // _document.data.value.mapValue.fields.favouriteMovies.arrayValue.values;
+    console.log(prevMovies);
+    const washingtonRef = doc(db, "users", loggedInEmail);
+    const newExistingFaves = prevMovies.favouriteMovies.push(mov);
     await updateDoc(washingtonRef, {
-      favouriteMovies: [ mov]
+      favouriteMovies: newExistingFaves
     });
-  }
+  };
 
   return (
     <>
@@ -48,7 +64,9 @@ const index = ({ movies }) => {
                       <Link href={`/latestmovies/${item.fullTitle}+${item.id}`}>
                         <a className="btn btn-light">View Details</a>
                       </Link>{" "}
-                      <button onClick={()=>addToFavourites(item)}>Add To favourites</button>
+                      <button onClick={() => addToFavourites(item)}>
+                        Add To favourites
+                      </button>
                     </div>
                   </div>
                 </div>
@@ -61,7 +79,7 @@ const index = ({ movies }) => {
   );
 };
 
-export default index;
+export default Index;
 
 export async function getStaticProps() {
   const resp = await fetch(
