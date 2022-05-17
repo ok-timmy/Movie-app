@@ -36,5 +36,5 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 
 ## Features:
 - Work on a home page
-- Work on the Login & Sign up Feature using next auth using their google account
 - Work on Creating a favorites list for each user so they can add some movies to their favorites list using firebase
+- Style the NavBar
