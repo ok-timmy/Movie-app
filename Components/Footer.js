@@ -1,7 +1,7 @@
 
 function Footer() {
   return (
-    <div>Built By Timmy &copy; using NextJS and Bootstrap</div>
+    <div className="text-center">Built By Timmy &copy; using NextJS and Bootstrap</div>
   )
 }
 

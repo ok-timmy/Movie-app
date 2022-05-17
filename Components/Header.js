@@ -37,12 +37,12 @@ const NavLinks = styled.li`
 function Header() {
   const [tokenExist, setTokenExist] = useState(false);
   const router = useRouter();
+  // router.reload(window.location.pathname);
 
   useEffect(() => {
     const token = sessionStorage.getItem("Token");
     if (token) {
       setTokenExist(true);
-      // router.reload(window.location.pathname);
     }
   }, []);
 

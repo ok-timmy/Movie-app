@@ -1,5 +1,4 @@
 import { useState } from "react";
-import  {app, db} from "../../src/config/firebase.config";
 import Link from "next/link";
 import { SignUpWithEmail, SignedUpWithGoogle } from "../../src/auth/auth";
 import { useRouter } from "next/router";
@@ -117,7 +116,7 @@ export default function SignUp() {
                         type="button"
                         className="btn btn-success btn-block btn-lg gradient-custom-4 text-body"
                         onClick={() => {
-                          SignUpWithEmail(email, password, router);
+                          SignUpWithEmail(name, email, password, router);
                         }}
                         disabled={isDisabled}
                       >

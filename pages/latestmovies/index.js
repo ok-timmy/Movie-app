@@ -1,9 +1,9 @@
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
-import { doc, getDoc, updateDoc } from "firebase/firestore";
-import { db } from "../../src/config/firebase.config";
 import { useEffect, useState } from "react";
+import { addToFavourites } from "../../src/favorites/faves";
+
 
 const Index = ({ movies }) => {
   const [loggedInEmail, setLoggedInEmail] = useState("")
@@ -16,19 +16,6 @@ const Index = ({ movies }) => {
   }, [])
   
 
-  const addToFavourites = async (mov) => {
-    const docRef = doc(db, "users", loggedInEmail);
-    const docSnap = await getDoc(docRef);
-    const prevMovies = docSnap.data();
-    const existingFaves = prevMovies.favouriteMovies;
-    // _document.data.value.mapValue.fields.favouriteMovies.arrayValue.values;
-    console.log(prevMovies);
-    const washingtonRef = doc(db, "users", loggedInEmail);
-    const newExistingFaves = prevMovies.favouriteMovies.push(mov);
-    await updateDoc(washingtonRef, {
-      favouriteMovies: newExistingFaves
-    });
-  };
 
   return (
     <>
@@ -64,7 +51,7 @@ const Index = ({ movies }) => {
                       <Link href={`/latestmovies/${item.fullTitle}+${item.id}`}>
                         <a className="btn btn-light">View Details</a>
                       </Link>{" "}
-                      <button onClick={() => addToFavourites(item)}>
+                      <button onClick={() => addToFavourites(item, loggedInEmail)}>
                         Add To favourites
                       </button>
                     </div>

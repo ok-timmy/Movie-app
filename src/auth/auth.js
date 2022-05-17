@@ -21,7 +21,6 @@ const adduser = async(n, e, img) => {
 
 
 export function SignInWithEmail (_email, _password, router) {
-    // const router = useRouter();
     const auth = getAuth();
     signInWithEmailAndPassword(auth, _email, _password)
       .then((userCredential) => {
@@ -31,7 +30,6 @@ export function SignInWithEmail (_email, _password, router) {
         sessionStorage.setItem("User", user.email);
         // console.log(user);
         router.back();
-        // reroute();
       })
       .catch((error) => {
         const errorCode = error.code;
@@ -42,7 +40,6 @@ export function SignInWithEmail (_email, _password, router) {
   };
 
   export function SignInWithGoogle (router)  {
-    // const router = useRouter();
     const provider = new GoogleAuthProvider();
 
     const auth = getAuth();
@@ -53,8 +50,7 @@ export function SignInWithEmail (_email, _password, router) {
         const token = credential.accessToken;
         // The signed-in user info.
         const user = result.user;
-        // console.log(user);
-        // sessionStorage.setItem('Token', user.accessToken);
+        sessionStorage.setItem('Token', user.accessToken);
         sessionStorage.setItem("User", user.email);
         // router.push("/");
         router.back();
@@ -71,14 +67,14 @@ export function SignInWithEmail (_email, _password, router) {
       });
   };
 
-  export function SignUpWithEmail (_email, _password, router) {  
+  export function SignUpWithEmail (_name, _email, _password, router) {  
     const auth = getAuth(); 
     createUserWithEmailAndPassword(auth, _email, _password)
       .then((userCredential) => {
         // Signed in
         // const user = userCredential.user;
         console.log(userCredential);
-         adduser(name, email);
+         adduser(_name, _email);
         //  sessionStorage.setItem("Token", userCredential.accessToken);
         //  router.reload(window.location.pathname);
         router.push("/account/sign-in");

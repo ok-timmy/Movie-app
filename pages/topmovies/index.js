@@ -1,9 +1,19 @@
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
+import { useEffect, useState } from "react";
 
-const index = ({ movies }) => {
+const Index = ({ movies }) => {
   const { items } = movies;
+
+  
+  const [loggedInEmail, setLoggedInEmail] = useState("");
+  useEffect(() => {
+    const activeUser = sessionStorage.getItem("User");
+    setLoggedInEmail(activeUser);
+    console.log(activeUser);
+  }, [])
+
 
   return (
     <>
@@ -39,6 +49,9 @@ const index = ({ movies }) => {
                       <Link href={`/topmovies/${item.fullTitle}+${item.id}`}>
                         <a className="btn btn-light">View Details</a>
                       </Link>{" "}
+                      <button onClick={() => addToFavourites(item, loggedInEmail)}>
+                        Add To favourites
+                      </button>
                     </div>
                   </div>
                 </div>
@@ -51,7 +64,7 @@ const index = ({ movies }) => {
   );
 };
 
-export default index;
+export default Index;
 
 export async function getStaticProps() {
   const resp = await fetch(
