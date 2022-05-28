@@ -35,6 +35,6 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 
 
 ## Features:
-- Work on a home page
-- Work on Creating a favorites list for each user so they can add some movies to their favorites list using firebase
-- Style the NavBar
+- Add a Dark Theme Functionality
+- Complete the search Feature -- Add a text at the landing section to direct users to the searchsection.
+- Make The home page fully responsive

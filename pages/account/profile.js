@@ -18,6 +18,7 @@ const ProfileDetails = styled.div`
   position: relative;
   margin-top: 10rem;
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
   align-items: center;
   border: 2px solid red;
@@ -26,6 +27,11 @@ const ProfileDetails = styled.div`
   -webkit-box-shadow: 10px 10px 5px 0px rgba(242, 242, 242, 0.75);
   -moz-box-shadow: 10px 10px 5px 0px rgba(242, 242, 242, 0.75);
 `;
+
+const ProfileEmail = styled.div`
+font-size: 1rem;
+font-weight: 400;
+`
 
 const ProfilePicture = styled.div`
   position: absolute;
@@ -40,7 +46,7 @@ const ProfilePicture = styled.div`
 //
 
 const ProfileInfo = styled.div`
-  margin: 0 auto;
+  margin: 4rem auto 0;
   font-size: 2.2rem;
   font-weight: 300;
 `;
@@ -147,6 +153,7 @@ function Profile() {
             />
           </ProfilePicture>
           <ProfileInfo>{user.displayName}</ProfileInfo>
+          <ProfileEmail>{user.email}</ProfileEmail>
         </ProfileDetails>
 
         <FavouriteMovies>
