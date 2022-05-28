@@ -38,3 +38,4 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 - Add a Dark Theme Functionality
 - Complete the search Feature -- Add a text at the landing section to direct users to the searchsection.
 - Make The home page fully responsive
+- Add the IMDB rating there
