@@ -14,10 +14,11 @@ export function ContextWrapper ({children}) {
         setUserData({})
     }
 
-    const logout = ()=> {
+    const logout = (move)=> {
         clearData();
         console.log(userData);
         sessionStorage.clear();
+        move();
     }
 
     return (

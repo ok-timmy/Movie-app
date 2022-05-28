@@ -41,6 +41,7 @@ function Header() {
   const [LoggedInUser, setLoggedInUser] = useState(null);
   const { userData, logout } = useContext(userContext);
   const router = useRouter();
+  const {push} = router;
   // router.reload(window.location.pathname);
 
   useEffect(() => {
@@ -114,7 +115,7 @@ function Header() {
                 </Link>
               </NavLinks>
               <NavLinks>
-                <button onClick={() => logout()}>Sign out</button>
+                <button onClick={() => logout(push("/"))}>Sign out</button>
               </NavLinks>
             </NavList>
           )}

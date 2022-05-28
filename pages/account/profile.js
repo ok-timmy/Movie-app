@@ -4,7 +4,6 @@ import styled from "styled-components";
 import WatchListCard from "../../Components/WatchListCard";
 import userContext from "../../Context/context";
 
-
 const ProfilePage = styled.div`
   width: 70vw;
   min-height: 90vh;
@@ -38,6 +37,8 @@ const ProfilePicture = styled.div`
   border-radius: 50%;
 `;
 
+//
+
 const ProfileInfo = styled.div`
   margin: 0 auto;
   font-size: 2.2rem;
@@ -62,9 +63,18 @@ const Header = styled.p`
 `;
 
 const Watchlist = styled.div`
+  margin: 1rem auto 2rem;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-auto-rows: auto;
+  grid-column-gap: 20px;
+  grid-row-gap: 40px;
+
+  @media only screen and (max-width: 600px) {
+    align-items: center;
+    grid-template-columns: 1fr;
+    grid-row-gap: 80px;
+  }
 `;
 
 const EmptyList = styled.div`
@@ -74,29 +84,54 @@ const EmptyList = styled.div`
 `;
 
 const Photo = styled.div`
-width: 200px;
-height:200px;
-align-self: center;`
+  width: 200px;
+  height: 200px;
+  align-self: center;
+`;
 
 const Typography = styled.p`
-text-align: center;
-`
+  text-align: center;
+`;
 
+const Spinner = styled.div`
+  border: 8px solid #f3f3f3; /* Light grey */
+  border-top: 8px solid #3498db; /* Blue */
+  border-radius: 50%;
+  width: 80px;
+  height: 80px;
+  animation: spin 1s linear infinite;
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+`;
 
 function Profile() {
-
-  const m = '/../public/Empty-cuate.png';
+  const m = "/../public/Empty-cuate.png";
 
   const sessionUser = sessionStorage.getItem("User");
   const { userData, logout } = useContext(userContext);
   const [user, setUser] = useState(JSON.parse(sessionUser));
+  const [userWL, setUserWL] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+
   useEffect(() => {
     const sessionUser = sessionStorage.getItem("User");
-    console.log(sessionUser);
+    const sessionWL = sessionStorage.getItem("UserWL");
+    // console.log(sessionUser);
     setUser(JSON.parse(sessionUser));
+    setUserWL(JSON.parse(sessionWL));
+    setIsLoading(false);
   }, []);
 
-  console.log(user);
+  console.log(userWL.favouriteMovies);
+  console.log(isLoading);
+
+  // console.log(user);
 
   return (
     <>
@@ -116,16 +151,28 @@ function Profile() {
 
         <FavouriteMovies>
           <Header>My Watchlist</Header>
-          {user.Favourites ? (
+          {isLoading ? (
+            <Spinner />
+          ) : userWL.favouriteMovies !== [] ? (
             <Watchlist>
-              {user.Favourites.map((w) => {
-                <WatchListCard card={w} item={w.id}/>;
+              {userWL.favouriteMovies.map((w) => {
+                return <WatchListCard card={w} item={w.id} key={w.id} email={user.email}/>;
               })}
             </Watchlist>
           ) : (
             <EmptyList>
-              <Photo><Image src={m} alt='next'  responsive={"100vw"} width={200} height={200} /></Photo>
-              <Typography>You do not have any movie on your watchlist.</Typography>
+              <Photo>
+                <Image
+                  src={m}
+                  alt="next"
+                  responsive={"100vw"}
+                  width={200}
+                  height={200}
+                />
+              </Photo>
+              <Typography>
+                You do not have any movie on your watchlist.
+              </Typography>
             </EmptyList>
           )}
         </FavouriteMovies>

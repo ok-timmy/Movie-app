@@ -9,7 +9,7 @@ const Index = ({ movies }) => {
   const [loggedInEmail, setLoggedInEmail] = useState("");
   useEffect(() => {
     const activeUser = sessionStorage.getItem("User");
-    setLoggedInEmail(activeUser);
+    setLoggedInEmail(activeUser.email);
     console.log(activeUser);
   }, [])
 
@@ -32,7 +32,7 @@ const Index = ({ movies }) => {
           <div className="row">
             {items.map((item) => {
               return (
-                <MovieCard item={item} key={item.id} />
+                <MovieCard item={item} key={item.id} loggedInEmail={loggedInEmail} />
               );
             })}
           </div>
