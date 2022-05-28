@@ -1,7 +1,6 @@
 import Head from "next/head";
-import Image from "next/image";
-import Link from "next/link";
 import { useEffect, useState } from "react";
+import MovieCard from "../../Components/MovieCard";
 
 const Index = ({ movies }) => {
   const { items } = movies;
@@ -33,28 +32,7 @@ const Index = ({ movies }) => {
           <div className="row">
             {items.map((item) => {
               return (
-                <div key={item.id} className="col">
-                  <div className="card mb-3" style={{ width: "20rem" }}>
-                    <Image
-                      responsive={"100vw"}
-                      src={item.image}
-                      className="card-img-top"
-                      alt="..."
-                      width={60}
-                      height={270}
-                    />
-                    <div className="card-body">
-                      <h5 className="card-title">{item.fullTitle}</h5>
-                      <p className="card-text">{item.year}</p>
-                      <Link href={`/topmovies/${item.fullTitle}+${item.id}`}>
-                        <a className="btn btn-light">View Details</a>
-                      </Link>{" "}
-                      <button onClick={() => addToFavourites(item, loggedInEmail)}>
-                        Add To favourites
-                      </button>
-                    </div>
-                  </div>
-                </div>
+                <MovieCard item={item} key={item.id} />
               );
             })}
           </div>

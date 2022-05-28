@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import Link from "next/link";
 import { SignUpWithEmail, SignedUpWithGoogle } from "../../src/auth/auth";
 import { useRouter } from "next/router";
+import userContext from "../../Context/context";
 
 
 
@@ -10,6 +11,7 @@ export default function SignUp() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("")
+  const {login} = useContext(userContext)
 
   const router = useRouter();
 
@@ -137,7 +139,7 @@ export default function SignUp() {
                       type="button"
                       className="btn btn-light"
                       style={{ color: "red" }}
-                      onClick={() => SignedUpWithGoogle(router)}
+                      onClick={() => SignedUpWithGoogle(router, login)}
                      disabled={isDisabled}
                     >
                       <i className="bi bi-google"></i>

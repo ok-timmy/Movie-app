@@ -1,11 +1,13 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Link from "next/link";
-import { SignInWithEmail, SignInWithGoogle } from "../../src/auth/auth";
+import { SignInWithEmail, SignedUpWithGoogle } from "../../src/auth/auth";
 import { useRouter } from "next/router";
+import userContext from "../../Context/context";
 
 function SignIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const {login} = useContext(userContext);
 
   const router = useRouter();
 
@@ -82,7 +84,7 @@ function SignIn() {
                     <button
                       type="button"
                       className="btn btn-light"
-                      onClick={() => SignInWithGoogle(router)}
+                      onClick={() => SignedUpWithGoogle(router, login)}
                     >
                       <i className="bi bi-google"></i>
                     </button>

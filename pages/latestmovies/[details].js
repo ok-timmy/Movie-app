@@ -23,7 +23,7 @@ function Details({ movieDetail }) {
 
   return (
     <>
-      <section className="h-100 bg-light">
+      <section className="h-100 bg-light mt-4 pt-5">
         <div className="container h-auto px-2">
           <div className="row d-flex justify-content-center align-items-center h-100">
             <div className="col">
@@ -67,7 +67,7 @@ function Details({ movieDetail }) {
                                   style={{ borderRadius: "50%" }}
                                 />
                                 <span
-                                  className="d-flex justify-content-center"
+                                  className="d-flex justify-content-center text-center"
                                   style={{ fontSize: "10px" }}
                                 >
                                   {star.name}

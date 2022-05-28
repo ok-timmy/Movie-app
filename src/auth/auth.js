@@ -10,8 +10,9 @@ import { doc, setDoc } from "firebase/firestore";
 
 
 
+
 const adduser = async(n, e, img) => {
-    await setDoc(doc(db, "users", e), {
+    await setDoc(doc("users", "users", e), {
       name: n,
       email: e,
       profilePicture: img || "",
@@ -26,9 +27,6 @@ export function SignInWithEmail (_email, _password, router) {
       .then((userCredential) => {
         // Signed in
         const user = userCredential.user;
-        sessionStorage.setItem('Token', response.user.accessToken);
-        sessionStorage.setItem("User", user.email);
-        // console.log(user);
         router.back();
       })
       .catch((error) => {
@@ -36,34 +34,6 @@ export function SignInWithEmail (_email, _password, router) {
         const errorMessage = error.message;
         console.log(errorCode);
         console.log(errorMessage)
-      });
-  };
-
-  export function SignInWithGoogle (router)  {
-    const provider = new GoogleAuthProvider();
-
-    const auth = getAuth();
-    signInWithPopup(auth, provider)
-      .then((userCredential) => {
-        // This gives you a Google Access Token. You can use it to access the Google API.
-        const credential = GoogleAuthProvider.credentialFromResult(result);
-        const token = credential.accessToken;
-        // The signed-in user info.
-        const user = result.user;
-        sessionStorage.setItem('Token', user.accessToken);
-        sessionStorage.setItem("User", user.email);
-        // router.push("/");
-        router.back();
-      })
-      .catch((error) => {
-        // Handle Errors here.
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        // The email of the user's account used.
-        const email = error.email;
-        // The AuthCredential type that was used.
-        const credential = GoogleAuthProvider.credentialFromError(error);
-        // ...
       });
   };
 
@@ -75,8 +45,6 @@ export function SignInWithEmail (_email, _password, router) {
         // const user = userCredential.user;
         console.log(userCredential);
          adduser(_name, _email);
-        //  sessionStorage.setItem("Token", userCredential.accessToken);
-        //  router.reload(window.location.pathname);
         router.push("/account/sign-in");
       })
       .catch((error) => {
@@ -86,19 +54,22 @@ export function SignInWithEmail (_email, _password, router) {
       });
   };
 
-  export function SignedUpWithGoogle(router) {
+  export function SignedUpWithGoogle(router, login) {
+    const provider = new GoogleAuthProvider();
     const auth = getAuth();
+    
     signInWithPopup(auth, provider)
-      .then((result) => {
+    .then((result) => {
+        console.log(auth);
         // This gives you a Google Access Token. You can use it to access the Google API.
         const credential = GoogleAuthProvider.credentialFromResult(result);
         const token = credential.accessToken;
         // The signed-in user info.
         const user = result.user;
+        console.log(token);
         console.log(user);
-        adduser(user.displayName, user.email, user.photoURL);
+       login(user, token);
         router.back();
-        // ...
       })
       .catch((error) => {
         // Handle Errors here.
@@ -108,6 +79,7 @@ export function SignInWithEmail (_email, _password, router) {
         const email = error.email;
         // The AuthCredential type that was used.
         const credential = GoogleAuthProvider.credentialFromError(error);
+        console.log(errorMessage);
         // ...
       });
   };

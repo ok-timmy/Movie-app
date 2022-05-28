@@ -1,9 +1,10 @@
 import Link from "next/link";
 import Head from "next/head";
 import styled from "styled-components";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useRouter } from "next/router";
-import { getAuth, signOut } from "firebase/auth";
+import userContext from "../Context/context";
+import Image from "next/image";
 
 const HeaderWrapper = styled.div`
   width: 100vw;
@@ -12,7 +13,7 @@ const HeaderWrapper = styled.div`
   position: fixed;
   top: 0;
   z-index: 1000;
-  font-size: 15px
+  font-size: 15px;
 `;
 
 const MainHeader = styled.div`
@@ -37,27 +38,22 @@ const NavLinks = styled.li`
 
 function Header() {
   const [tokenExist, setTokenExist] = useState(false);
+  const [LoggedInUser, setLoggedInUser] = useState(null);
+  const { userData, logout } = useContext(userContext);
   const router = useRouter();
   // router.reload(window.location.pathname);
 
   useEffect(() => {
     const token = sessionStorage.getItem("Token");
     if (token) {
+      const sessionUser = sessionStorage.getItem("User");
+      const user = JSON.parse(sessionUser);
       setTokenExist(true);
-    }
-  }, []);
+      setLoggedInUser(user);
+    } else setTokenExist(false);
+  }, [userData]);
 
-  const logout = () => {
-    const auth = getAuth();
-    signOut(auth)
-      .then(() => {
-        console.log("Log out Successful");
-        sessionStorage.clear();
-      })
-      .catch((error) => {
-        // An error happened.
-      });
-  };
+  // console.log(LoggedInUser);
 
   return (
     <>
@@ -107,10 +103,18 @@ function Header() {
           ) : (
             <NavList>
               <NavLinks>
-                <button onClick={()=>logout()}>Sign out</button>
+                <Link href="/account/profile" passHref>
+                  <Image
+                    src={LoggedInUser.photoURL}
+                    alt={"Profile-picture"}
+                    width={40}
+                    height={40}
+                    style={{ borderRadius: "50%" }}
+                  />
+                </Link>
               </NavLinks>
               <NavLinks>
-                <Link href="/account/sign-up">Profile</Link>
+                <button onClick={() => logout()}>Sign out</button>
               </NavLinks>
             </NavList>
           )}

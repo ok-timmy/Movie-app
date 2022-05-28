@@ -44,8 +44,8 @@ export default function Home() {
           <Image
             src={"/../public/movi-app-removebg-preview.png"}
             alt={"Movie-img"}
-            width={600}
-            height={400}
+            width={800}
+            height={600}
           />
         </div>
         <div>
