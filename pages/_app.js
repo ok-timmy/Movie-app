@@ -5,6 +5,7 @@ import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import Script from "next/script";
 import { ContextWrapper } from "../Components/ContextWrapper";
+import { navBarLinks } from "../Components/NavLinks";
 // import Popper from 'popper.js'
 // import { useEffect } from "react";
 
@@ -12,7 +13,7 @@ function MyApp({ Component, pageProps }) {
   return (
     <>
     <ContextWrapper >
-      <Header />
+      <Header navBarLinks={navBarLinks}/>
       <Component {...pageProps} />
       <Footer />
       <Script />

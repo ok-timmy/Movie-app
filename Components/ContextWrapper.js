@@ -18,7 +18,7 @@ export function ContextWrapper ({children}) {
         clearData();
         console.log(userData);
         sessionStorage.clear();
-        move();
+        move;
     }
 
     return (

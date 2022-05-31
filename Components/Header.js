@@ -127,13 +127,13 @@ const ToggleIcon = styled.div`
   }
 `;
 
-function Header() {
+function Header({navBarLinks}) {
   const [active, setActive] = useState();
   const [tokenExist, setTokenExist] = useState(false);
   const [LoggedInUser, setLoggedInUser] = useState(null);
   const { userData, logout } = useContext(userContext);
   const router = useRouter();
-  const { push } = router;
+  // const { push } = router;
 
   const [isMobileNav, setIsMobileNav] = useState(false);
   const node = useRef();
@@ -147,8 +147,9 @@ function Header() {
   useEffect(() => {
     const token = sessionStorage.getItem("Token");
     if (token) {
-      const sessionUser = sessionStorage.getItem("User");
+      const sessionUser = sessionStorage.getItem("UserDatabase");
       const user = JSON.parse(sessionUser);
+      console.log(user);
       setTokenExist(true);
       setLoggedInUser(user);
     } else setTokenExist(false);
@@ -156,26 +157,7 @@ function Header() {
 
   // console.log(LoggedInUser);
 
-  const navBarLinks = [
-    {
-      name: "latestmovies",
-      link: "/latestmovies",
-      normal: "bi bi-star",
-      filled: "bi bi-star-fill",
-    },
-    {
-      name: "mostpopular",
-      link: "/mostpopular",
-      normal: "bi bi-camera-reels",
-      filled: "bi bi-camera-reels-fill",
-    },
-    {
-      name: "topmovies",
-      link: "/topmovies",
-      normal: "bi bi-file-play",
-      filled: "bi bi-file-play-fill",
-    },
-  ];
+  
 
   return (
     <>
@@ -198,7 +180,7 @@ function Header() {
           <NavList>
             {navBarLinks.map((navBarLink) => {
               return (
-                <NavLinks key={navBarLink.id}>
+                <NavLinks key={navBarLink.name}>
                   {active === navBarLink.name ? (
                     <i
                       className={navBarLink.filled}
@@ -215,7 +197,7 @@ function Header() {
                       className="nav-link"
                       onClick={() => setActive(navBarLink.name)}
                     >
-                      Latest Movies
+                      {navBarLink.name}
                     </a>
                   </Link>
                 </NavLinks>
@@ -239,18 +221,21 @@ function Header() {
           ) : (
             <NavList>
               <NavLinks>
-                <Link href="/account/profile" passHref>
+                <Link href="/account/profile" passHref >
                   <Image
-                    src={LoggedInUser.photoURL}
+                    src={LoggedInUser.profilePicture}
                     alt={"Profile-picture"}
                     width={40}
                     height={40}
                     style={{ borderRadius: "50%" }}
+                    onClick={() => setActive()}
                   />
                 </Link>
               </NavLinks>
               <NavLinks>
-                <Button onClick={() => logout(push("/"))}>Sign out</Button>
+                <Button onClick={() => logout(router.push("/"))}>
+                  Sign out
+                </Button>
               </NavLinks>
             </NavList>
           )}
@@ -270,13 +255,14 @@ function Header() {
           <>
             {LoggedInUser && (
               <MobileLink>
-                <Link href="/account/profile" passHref>
+                <Link href="/account/profile" passHref >
                   <Image
-                    src={LoggedInUser.photoURL}
+                    src={LoggedInUser.profilePicture}
                     alt={"Profile-picture"}
                     width={40}
                     height={40}
                     style={{ borderRadius: "50%" }}
+                    onClick={()=> setActive()}
                   />
                 </Link>
               </MobileLink>
@@ -298,7 +284,7 @@ function Header() {
         )}
         {navBarLinks.map((navBarLink) => {
           return (
-            <MobileLink key={navBarLink.id}>
+            <MobileLink key={navBarLink.name}>
               {active === navBarLink.name ? (
                 <i className={navBarLink.filled} style={{ color: "blue" }}></i>
               ) : (
@@ -309,15 +295,14 @@ function Header() {
                   className="nav-link"
                   onClick={() => setActive(navBarLink.name)}
                 >
-                  Latest Movies
+                  {navBarLink.name}
                 </a>
               </Link>
             </MobileLink>
           );
         })}
         {LoggedInUser && (
-            <Button onClick={() => logout(push("/"))}>Sign out</Button>
-       
+          <Button onClick={() => logout(push("/"))}>Sign out</Button>
         )}
       </MobileNav>
     </>

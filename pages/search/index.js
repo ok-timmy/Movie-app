@@ -5,6 +5,7 @@ import MovieCard from "../../Components/MovieCard";
 const Index = ({ movies }) => {
   const { items } = movies;
 
+  
   const [loggedInEmail, setLoggedInEmail] = useState("");
   useEffect(() => {
     const activeUser = sessionStorage.getItem("UserDatabase");
@@ -15,6 +16,7 @@ const Index = ({ movies }) => {
     }
     // console.log(activeUser);
   }, []);
+
 
   return (
     <>
@@ -28,12 +30,14 @@ const Index = ({ movies }) => {
       </Head>
 
       <div>
-        <h2 className="mt-5 pt-5 mx-3 mx-md-5 px-md-3">Most Popular Movies</h2>
+        <h2 className="mt-5 pt-5 mx-3 mx-md-5 px-md-3">Your Search Result</h2>
 
         <div className="container mt-5 mx-auto">
           <div className="row">
             {items.map((item) => {
-              return <MovieCard item={item} key={item.id} loggedInEmail={loggedInEmail} />;
+              return (
+                <MovieCard item={item} key={item.id} loggedInEmail={loggedInEmail} />
+              );
             })}
           </div>
         </div>
@@ -46,7 +50,7 @@ export default Index;
 
 export async function getStaticProps() {
   const resp = await fetch(
-    "https://imdb-api.com/en/API/MostPopularTVs/k_5cpyi6x9"
+    "https://imdb-api.com/en/API/Top250TVs/k_5cpyi6x9"
   );
   const data = await resp.json();
   // console.log(data);

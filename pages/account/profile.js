@@ -127,15 +127,15 @@ function Profile() {
 
   useEffect(() => {
     const sessionUser = sessionStorage.getItem("User");
-    const sessionWL = sessionStorage.getItem("UserWL");
-    // console.log(sessionUser);
-    setUser(JSON.parse(sessionUser));
+    const sessionWL = sessionStorage.getItem("UserDatabase");
+    console.log(sessionUser);
+    setUser(JSON.parse(sessionWL));
     setUserWL(JSON.parse(sessionWL));
     setIsLoading(false);
   }, []);
 
-  console.log(userWL.favouriteMovies);
-  console.log(isLoading);
+  // console.log(userWL.favouriteMovies);
+  // console.log(isLoading);
 
   // console.log(user);
 
@@ -160,7 +160,7 @@ function Profile() {
           <Header>My Watchlist</Header>
           {isLoading ? (
             <Spinner />
-          ) : userWL.favouriteMovies !== [] ? (
+          ) : userWL && userWL.favouriteMovies !== [] ? (
             <Watchlist>
               {userWL.favouriteMovies.map((w) => {
                 return <WatchListCard card={w} item={w.id} key={w.id} email={user.email}/>;

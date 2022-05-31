@@ -1,5 +1,12 @@
-import { arrayRemove, arrayUnion, doc, updateDoc } from "firebase/firestore";
-import { db } from "../../src/config/firebase.config";
+import {
+  arrayRemove,
+  arrayUnion,
+  collection,
+  doc,
+  getDoc,
+  updateDoc,
+} from "firebase/firestore";
+import { db }  from "../../src/config/firebase.config";
 
 export const getWatchList = async (user) => {
   const docRef = doc(db, "users", user);
@@ -7,7 +14,7 @@ export const getWatchList = async (user) => {
 
   if (docSnap.exists()) {
     const data = docSnap.data();
-    sessionStorage.setItem("UserWL", data.favouriteMovies);
+    sessionStorage.setItem("User", data);
     console.log("Document data:", docSnap.data());
   } else {
     // doc.data() will be undefined in this case
@@ -16,19 +23,18 @@ export const getWatchList = async (user) => {
 };
 
 export const addToWatchList = async (mov, user, router) => {
-  if(!user) {
-    router.push('/account/signin');
-  }
-
-  else {
-
+  // console.log(db);
+  try{if (user === null) {
+    router.push("/account/sign-in");
+  } else {
     const docRef = doc(db, "users", user);
-    
+    console.log(docRef);
+
     await updateDoc(docRef, {
       favouriteMovies: arrayUnion(mov),
-    });
-    
-    getWatchList(user);
+    }).then(getWatchList(user));
+  }} catch(err){
+    console.log(err);
   }
 
   // const prevMovies = docSnap.data();

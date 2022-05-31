@@ -7,12 +7,16 @@ const Index = ({ movies }) => {
   const { items } = movies;
 
   useEffect(() => {
-    const activeUser = sessionStorage.getItem("User");
+    const activeUser = sessionStorage.getItem("UserDatabase");
+    const activeU = JSON.parse(activeUser);
+    console.log(activeU);
     if (activeUser) {
-      setLoggedInEmail(activeUser.email);
+      setLoggedInEmail(activeU.email);
     }
-    console.log(activeUser);
+    // console.log(activeUser);
   }, []);
+
+  console.log(loggedInEmail);
 
   return (
     <>
@@ -26,7 +30,7 @@ const Index = ({ movies }) => {
       </Head>
 
       <div>
-        <h2 className="mt-4 mx-3 mx-md-5 px-md-3">Top 250 Movies</h2>
+        <h2 className="mt-5 pt-5 mx-3 mx-md-5 px-md-3">Latest Movies</h2>
 
         <div className="container mt-5 mx-auto">
           <div className="row">
