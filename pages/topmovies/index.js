@@ -50,7 +50,7 @@ export default Index;
 
 export async function getStaticProps() {
   const resp = await fetch(
-    "https://imdb-api.com/en/API/Top250TVs/k_5cpyi6x9"
+    "https://imdb-api.com/en/API/Top250Movies/k_5cpyi6x9"
   );
   const data = await resp.json();
   // console.log(data);

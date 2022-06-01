@@ -9,14 +9,7 @@ import {
 import { collection, doc, setDoc } from "firebase/firestore";
 import { GetUserData } from "./fetchUser";
 
-const adduser = async (n, e, img) => {
-  await setDoc(doc(collection, "users", e), {
-    name: n,
-    email: e,
-    profilePicture: img || "",
-    favouritesMovies: [],
-  });
-};
+
 
 export function SignInWithEmail(_email, _password, router) {
   const auth = getAuth();
@@ -68,10 +61,8 @@ export function SignedUpWithGoogle(router, login) {
       const user = result.user;
       // console.log(token);
       console.log(user);
-      GetUserData(user.email, adduser(user.displayName, user.email, user.photoURL));
       login(user, token);
-
-      router.fallback();
+      router;
     })
     .catch((error) => {
       // Handle Errors here.

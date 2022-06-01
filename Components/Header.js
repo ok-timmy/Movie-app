@@ -127,13 +127,30 @@ const ToggleIcon = styled.div`
   }
 `;
 
+const Spinner = styled.div`
+  border: 8px solid #f3f3f3; /* Light grey */
+  border-top: 8px solid #3498db; /* Blue */
+  border-radius: 50%;
+  width: 80px;
+  height: 80px;
+  animation: spin 1s linear infinite;
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+`;
+
 function Header({navBarLinks}) {
   const [active, setActive] = useState();
   const [tokenExist, setTokenExist] = useState(false);
   const [LoggedInUser, setLoggedInUser] = useState(null);
-  const { userData, logout } = useContext(userContext);
+  const { userData, logout, setLog, log, setData } = useContext(userContext);
+  const [isLoading, setIsLoading] = useState(true);
   const router = useRouter();
-  // const { push } = router;
 
   const [isMobileNav, setIsMobileNav] = useState(false);
   const node = useRef();
@@ -147,15 +164,18 @@ function Header({navBarLinks}) {
   useEffect(() => {
     const token = sessionStorage.getItem("Token");
     if (token) {
-      const sessionUser = sessionStorage.getItem("UserDatabase");
+      const sessionUser = sessionStorage.getItem("User");
       const user = JSON.parse(sessionUser);
       console.log(user);
       setTokenExist(true);
       setLoggedInUser(user);
+      setData();
+      setIsLoading(false)
+      setLog(sessionUser);
     } else setTokenExist(false);
   }, [userData]);
 
-  // console.log(LoggedInUser);
+  console.log(log);
 
   
 
@@ -220,18 +240,18 @@ function Header({navBarLinks}) {
             </NavList>
           ) : (
             <NavList>
-              <NavLinks>
+              { isLoading? <Spinner/> : <NavLinks>
                 <Link href="/account/profile" passHref >
-                  <Image
-                    src={LoggedInUser.profilePicture}
+                  <a><Image
+                    src={LoggedInUser.photoURL}
                     alt={"Profile-picture"}
                     width={40}
                     height={40}
                     style={{ borderRadius: "50%" }}
                     onClick={() => setActive()}
-                  />
+                  /></a>
                 </Link>
-              </NavLinks>
+              </NavLinks>}
               <NavLinks>
                 <Button onClick={() => logout(router.push("/"))}>
                   Sign out
@@ -256,14 +276,14 @@ function Header({navBarLinks}) {
             {LoggedInUser && (
               <MobileLink>
                 <Link href="/account/profile" passHref >
-                  <Image
-                    src={LoggedInUser.profilePicture}
+                 <a> <Image
+                    src={LoggedInUser.photoURL}
                     alt={"Profile-picture"}
                     width={40}
                     height={40}
                     style={{ borderRadius: "50%" }}
                     onClick={()=> setActive()}
-                  />
+                  /> </a>
                 </Link>
               </MobileLink>
             )}

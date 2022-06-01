@@ -35,7 +35,7 @@ function MovieCard({ item, loggedInEmail }) {
       // console.log(x);
       const ssWL = JSON.parse(x);
       // console.log(ssWL);
-      ssWL ? setUsersWL(ssWL.favouriteMovies) : setUsersWL(null);
+      ssWL.favouriteMovies !== [] && setUsersWL(ssWL.favouriteMovies);
       // console.log(UsersWL);
       setIsLoading(false);
     }
@@ -46,11 +46,20 @@ function MovieCard({ item, loggedInEmail }) {
   }, []);
 
   const checkIfMovieExist = (movie, WatchListArray) => {
-    const isFound = WatchListArray.find((element) => {
-      if (element.id === movie.id) {
-        return true;
-      } else return false;
-    });
+    let isFound = false;
+    if (WatchListArray === []) {
+      return (
+        <button onClick={() => addToWatchList(item, loggedInEmail, router)}>
+          Add To Watchlist
+        </button>
+      );
+    } else {
+      [WatchListArray].find((element) => {
+        if (element === movie) {
+          isFound = true;
+        } else isFound = false;
+      });
+    }
     if (!isFound) {
       return (
         <button onClick={() => addToWatchList(item, loggedInEmail, router)}>
@@ -83,7 +92,11 @@ function MovieCard({ item, loggedInEmail }) {
           <Link href={`/latestmovies/${item.fullTitle}+${item.id}`}>
             <a className="btn btn-light">View Details</a>
           </Link>{" "}
-          {isLoading && UsersWL === null ? <Spinner /> : checkIfMovieExist(item, UsersWL)}
+          {isLoading && UsersWL === null ? (
+            <Spinner />
+          ) : (
+            checkIfMovieExist(item, UsersWL)
+          )}
         </div>
       </div>
     </div>

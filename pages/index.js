@@ -4,6 +4,14 @@ import styled from "styled-components";
 import styles from "../styles/Home.module.css";
 import '../src/config/firebase.config';
 import { useRouter } from "next/router";
+import Netflix from "../public/netflix.jpeg";
+import DW from "../public/dw.jpeg";
+import MGM from "../public/mgm.jpeg";
+import Rocky from "../public/rocky.jpeg";
+import Universal from "../public/universal.jpeg";
+import WB from "../public/wb.jpeg";
+import Sony from "../public/sony.png";
+import Paramount from "../public/paramount.png";
 
 
 const SearchSection = styled.div`
@@ -37,14 +45,14 @@ background-image: linear-gradient(to left bottom, #3c762f, #54822a, #6e8e23, #8a
 
 export default function Home() {
   const brandImages = [
-    {name: "/../public/netflix.jpeg"},
-   {name: "/../public/dw.jpeg"},
-   { name: "/../public/mgm.jpeg"},
-    {name: "/../public/rocky.jpeg"},
-    {name: "/../public/universal.jpeg"},
-    {name: "/../public/wb.jpeg"},
-    {name: "/../public/sony.png"},
-    {name: "/../public/paramount.png"},
+    {name: Netflix},
+   {name: DW},
+   { name: MGM},
+    {name: Rocky},
+    {name: Universal},
+    {name: WB},
+    {name: Sony},
+    {name: Paramount},
   ];
 
   const router = useRouter();

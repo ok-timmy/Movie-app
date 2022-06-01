@@ -124,7 +124,7 @@ export default Details;
 
 export async function getStaticPaths() {
   const resp = await fetch(
-    "https://imdb-api.com/en/API/MostPopularMovies/k_5cpyi6x9"
+    "https://imdb-api.com/en/API/Top250Movies/k_5cpyi6x9"
   );
   const { items } = await resp.json();
 

@@ -84,7 +84,7 @@ function SignIn() {
                     <button
                       type="button"
                       className="btn btn-light"
-                      onClick={() => SignedUpWithGoogle(router, login)}
+                      onClick={() => SignedUpWithGoogle(router.isFallback, login)}
                     >
                       <i className="bi bi-google"></i>
                     </button>

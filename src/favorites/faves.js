@@ -1,12 +1,11 @@
 import {
   arrayRemove,
   arrayUnion,
-  collection,
   doc,
   getDoc,
   updateDoc,
 } from "firebase/firestore";
-import { db }  from "../../src/config/firebase.config";
+import { db } from "../../src/config/firebase.config";
 
 export const getWatchList = async (user) => {
   const docRef = doc(db, "users", user);
@@ -14,7 +13,7 @@ export const getWatchList = async (user) => {
 
   if (docSnap.exists()) {
     const data = docSnap.data();
-    sessionStorage.setItem("User", data);
+    sessionStorage.setItem("UserDatabase", JSON.stringify(data));
     console.log("Document data:", docSnap.data());
   } else {
     // doc.data() will be undefined in this case
@@ -23,27 +22,20 @@ export const getWatchList = async (user) => {
 };
 
 export const addToWatchList = async (mov, user, router) => {
-  // console.log(db);
-  try{if (user === null) {
-    router.push("/account/sign-in");
-  } else {
-    const docRef = doc(db, "users", user);
-    console.log(docRef);
+  try {
+    if (user === null) {
+      router.push("/account/sign-in");
+    } else {
+      const docRef = doc(db, "users", user);
+      console.log(docRef);
 
-    await updateDoc(docRef, {
-      favouriteMovies: arrayUnion(mov),
-    }).then(getWatchList(user));
-  }} catch(err){
+      await updateDoc(docRef, {
+        favouriteMovies: arrayUnion(mov),
+      }).then(getWatchList(user));
+    }
+  } catch (err) {
     console.log(err);
   }
-
-  // const prevMovies = docSnap.data();
-  // console.log(prevMovies);
-  // const washingtonRef = doc(db, "users", user);
-  // const newExistingFaves = prevMovies.favouriteMovies.push(mov);
-  // await updateDoc(washingtonRef, {
-  //   favouriteMovies: newExistingFaves
-  // });
 };
 
 export const removeFromWatchList = async (mov, user) => {

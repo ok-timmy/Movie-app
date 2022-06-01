@@ -3,6 +3,7 @@ import { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
 import WatchListCard from "../../Components/WatchListCard";
 import userContext from "../../Context/context";
+import Empty from "../../public/Empty-cuate.png";
 
 const ProfilePage = styled.div`
   width: 70vw;
@@ -117,35 +118,30 @@ const Spinner = styled.div`
 `;
 
 function Profile() {
-  const m = "/../public/Empty-cuate.png";
-
-  const sessionUser = sessionStorage.getItem("User");
-  const { userData, logout } = useContext(userContext);
-  const [user, setUser] = useState(JSON.parse(sessionUser));
-  const [userWL, setUserWL] = useState([]);
+  const [user, setUser] = useState();
   const [isLoading, setIsLoading] = useState(true);
 
-  useEffect(() => {
-    const sessionUser = sessionStorage.getItem("User");
-    const sessionWL = sessionStorage.getItem("UserDatabase");
-    console.log(sessionUser);
-    setUser(JSON.parse(sessionWL));
-    setUserWL(JSON.parse(sessionWL));
-    setIsLoading(false);
-  }, []);
+  // console.log(userData)
 
-  // console.log(userWL.favouriteMovies);
-  // console.log(isLoading);
-
+ useEffect(() => {
+  const sessionUser = sessionStorage.getItem("UserDatabase");
+  console.log(sessionUser);
+  const myuser = JSON.parse(sessionUser);
+  console.log(sessionUser);
+  setUser(myuser);
+  setIsLoading(false);
+ }, [])
+ 
   // console.log(user);
 
   return (
-    <>
+    <>{
+      isLoading? <Spinner/> :
       <ProfilePage>
         <ProfileDetails>
           <ProfilePicture>
             <Image
-              src={user.photoURL}
+              src={user.profilePicture}
               alt="Profile-pic"
               width={100}
               height={100}
@@ -160,9 +156,9 @@ function Profile() {
           <Header>My Watchlist</Header>
           {isLoading ? (
             <Spinner />
-          ) : userWL && userWL.favouriteMovies !== [] ? (
+          ) : ([user.favouriteMovies].length === 0 ? (
             <Watchlist>
-              {userWL.favouriteMovies.map((w) => {
+              {[user.favouriteMovies].map((w) => {
                 return <WatchListCard card={w} item={w.id} key={w.id} email={user.email}/>;
               })}
             </Watchlist>
@@ -170,7 +166,7 @@ function Profile() {
             <EmptyList>
               <Photo>
                 <Image
-                  src={m}
+                  src={Empty}
                   alt="next"
                   responsive={"100vw"}
                   width={200}
@@ -181,9 +177,9 @@ function Profile() {
                 You do not have any movie on your watchlist.
               </Typography>
             </EmptyList>
-          )}
+          ))}
         </FavouriteMovies>
-      </ProfilePage>
+      </ProfilePage>}
     </>
   );
 }

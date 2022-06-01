@@ -34,11 +34,11 @@ const Index = ({ movies }) => {
 
         <div className="container mt-5 mx-auto">
           <div className="row">
-            {items.map((item) => {
+           { items ?  items.map((item) => {
               return (
                 <MovieCard item={item} key={item.id} loggedInEmail={loggedInEmail} />
               );
-            })}
+            }) : <div> Sorry,  We Could Not Find Your Search </div> }
           </div>
         </div>
       </div>

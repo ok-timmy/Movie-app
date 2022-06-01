@@ -20,7 +20,7 @@ export const navBarLinks = [
     {
       name: "TV Series",
       link: "/tvseries",
-      normal: "bi bi-file-play",
-      filled: "bi bi-file-play-fill",
+      normal: "bi bi-tv",
+      filled: "bi bi-tv-fill",
     },
   ];
