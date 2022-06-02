@@ -30,20 +30,23 @@ export const addToWatchList = async (mov, user, router) => {
       console.log(docRef);
 
       await updateDoc(docRef, {
-        favouriteMovies: arrayUnion(mov),
-      }).then(getWatchList(user));
+        favouritesMovies: arrayUnion(mov),
+      })
+      getWatchList(user);
+      changeMode;
     }
   } catch (err) {
     console.log(err);
   }
 };
 
-export const removeFromWatchList = async (mov, user) => {
+export const removeFromWatchList = async (mov, user, changeMode) => {
   const docRef = doc(db, "users", user);
 
   await updateDoc(docRef, {
-    favouriteMovies: arrayRemove(mov),
+    favouritesMovies: arrayRemove(mov),
   });
 
   getWatchList(user);
+  changeMode;
 };

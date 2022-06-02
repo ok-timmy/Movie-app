@@ -25,6 +25,7 @@ const Spinner = styled.div`
 function MovieCard({ item, loggedInEmail }) {
   const [UsersWL, setUsersWL] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [isSelected, setIsSelected] = useState(true);
   const router = useRouter();
   // console.log(loggedInEmail);
 
@@ -35,44 +36,66 @@ function MovieCard({ item, loggedInEmail }) {
       // console.log(x);
       const ssWL = JSON.parse(x);
       // console.log(ssWL);
-      ssWL.favouriteMovies !== [] && setUsersWL(ssWL.favouriteMovies);
+      ssWL.favouriteMovies !== [] && setUsersWL(ssWL.favouritesMovies);
       // console.log(UsersWL);
       setIsLoading(false);
     }
-    // else {
-    //   setUsersWL([]);
-    //   setIsLoading(false);
-    // }
-  }, []);
+    else {
+      setUsersWL([]);
+      setIsLoading(false);
+    }
+  }, [UsersWL]);
 
   const checkIfMovieExist = (movie, WatchListArray) => {
-    let isFound = false;
-    if (WatchListArray === []) {
-      return (
-        <button onClick={() => addToWatchList(item, loggedInEmail, router)}>
-          Add To Watchlist
-        </button>
-      );
-    } else {
-      [WatchListArray].find((element) => {
-        if (element === movie) {
-          isFound = true;
-        } else isFound = false;
+    let isFound;
+    if (WatchListArray.length !== 0) {
+      WatchListArray.find((element) => {
+        if (element.id === movie.id && isSelected) {
+          // setIsSelected(true);
+          isFound = (
+            <button
+              onClick={() => {
+                removeFromWatchList(
+                  item,
+                  loggedInEmail,
+                  setIsSelected((isSelected) => !isSelected)
+                );
+              }}
+            >
+              Remove
+            </button>
+          );
+        } else {
+          // setIsSelected(false)
+          isFound = (
+            <button
+              onClick={() => {
+                addToWatchList(
+                  item,
+                  loggedInEmail,
+                  router,
+                  setIsSelected((isSelected) => !isSelected)
+                );
+              }}
+            >
+              Add To Watchlist
+            </button>
+          );
+        }
       });
-    }
-    if (!isFound) {
-      return (
-        <button onClick={() => addToWatchList(item, loggedInEmail, router)}>
+    } else {
+      isFound = (
+        <button
+          onClick={() => {
+            addToWatchList(item, loggedInEmail, router);
+          }}
+        >
           Add To Watchlist
         </button>
       );
-    } else {
-      return (
-        <button onClick={() => removeFromWatchList(item, loggedInEmail)}>
-          Remove
-        </button>
-      );
     }
+
+    return isFound;
   };
 
   return (
@@ -92,7 +115,7 @@ function MovieCard({ item, loggedInEmail }) {
           <Link href={`/latestmovies/${item.fullTitle}+${item.id}`}>
             <a className="btn btn-light">View Details</a>
           </Link>{" "}
-          {isLoading && UsersWL === null ? (
+          {isLoading && UsersWL !== [] ? (
             <Spinner />
           ) : (
             checkIfMovieExist(item, UsersWL)

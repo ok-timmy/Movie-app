@@ -130,7 +130,7 @@ function Profile() {
   console.log(sessionUser);
   setUser(myuser);
   setIsLoading(false);
- }, [])
+ }, [user])
  
   // console.log(user);
 
@@ -156,9 +156,9 @@ function Profile() {
           <Header>My Watchlist</Header>
           {isLoading ? (
             <Spinner />
-          ) : ([user.favouriteMovies].length === 0 ? (
+          ) : (user.favouritesMovies.length !== 0 ? (
             <Watchlist>
-              {[user.favouriteMovies].map((w) => {
+              {user.favouritesMovies.map((w) => {
                 return <WatchListCard card={w} item={w.id} key={w.id} email={user.email}/>;
               })}
             </Watchlist>

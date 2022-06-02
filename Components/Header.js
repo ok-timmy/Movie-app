@@ -212,7 +212,7 @@ function Header({navBarLinks}) {
                       style={{ color: "blue" }}
                     ></i>
                   )}
-                  <Link href={navBarLink.link} passHref>
+                  <Link href={navBarLink.link}>
                     <a
                       className="nav-link"
                       onClick={() => setActive(navBarLink.name)}
