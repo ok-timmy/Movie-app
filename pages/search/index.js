@@ -1,9 +1,10 @@
 import Head from "next/head";
 import { useEffect, useState } from "react";
-import MovieCard from "../../Components/MovieCard";
+import { useRouter } from "next/router";
+import SearchMovieCard from "../../Components/SearchMovieCard";
 
 const Index = ({ movies }) => {
-  const { items } = movies;
+  const { results } = movies;
 
   
   const [loggedInEmail, setLoggedInEmail] = useState("");
@@ -29,14 +30,14 @@ const Index = ({ movies }) => {
         ></link>
       </Head>
 
-      <div>
+      <div className="bg-dark text-white mh-100">
         <h2 className="mt-5 pt-5 mx-3 mx-md-5 px-md-3">Your Search Result</h2>
 
         <div className="container mt-5 mx-auto">
           <div className="row">
-           { items ?  items.map((item) => {
-              return (
-                <MovieCard item={item} key={item.id} loggedInEmail={loggedInEmail} />
+           { results ?  results.map((item) => {
+            if (item.image !== 'https://imdb-api.com/images/original/nopicture.jpg') return (
+                <SearchMovieCard item={item} key={item.id} loggedInEmail={loggedInEmail} />
               );
             }) : <div> Sorry,  We Could Not Find Your Search </div> }
           </div>
@@ -48,12 +49,19 @@ const Index = ({ movies }) => {
 
 export default Index;
 
-export async function getStaticProps() {
+export async function getServerSideProps(context) {
+  // console.log(context);
+  const query = context.query;
+  console.log(query.query);
+  // const path = router.pathname
   const resp = await fetch(
-    "https://imdb-api.com/en/API/Top250TVs/k_5cpyi6x9"
+    // "https://imdb-api.com/en/API/Top250TVs/k_5cpyi6x9"
+    `https://imdb-api.com/en/API/SearchTitle/k_5cpyi6x9/${query.query}`
   );
   const data = await resp.json();
-  // console.log(data);
+  console.log(data);
+  const {results} = data;
+  console.log(results);
 
   return {
     props: { movies: data },

@@ -20,7 +20,7 @@ function SignIn() {
   }, []);
 
   return (
-    <section className="vh-100 py-5" style={{ backgroundColor: "white" }}>
+    <section className="vh-100 py-5 bg-dark text-light">
       <div className="container py-5 h-100">
         <div className="row d-flex justify-content-center align-items-center h-100">
           <div className="col-12 col-md-8 col-lg-6 col-xl-5">

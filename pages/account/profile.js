@@ -6,9 +6,11 @@ import userContext from "../../Context/context";
 import Empty from "../../public/Empty-cuate.png";
 
 const ProfilePage = styled.div`
-  width: 70vw;
+  padding: 4rem 15% 0;
   min-height: 90vh;
-  margin: 4rem auto 1rem;
+  margin: 0 auto ;
+  background: black;
+  color: white;
 
   @media only screen and (max-width: 600px) {
     width: 90vw;

@@ -27,7 +27,7 @@ const Index = ({ movies }) => {
         ></link>
       </Head>
 
-      <div>
+      <div className="bg-dark text-white mh-100">
         <h2 className="mt-5 pt-5 mx-3 mx-md-5 px-md-3">Most Popular Movies</h2>
 
         <div className="container mt-5 mx-auto">

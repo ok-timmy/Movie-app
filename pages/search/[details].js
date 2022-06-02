@@ -23,7 +23,7 @@ function Details({ movieDetail }) {
 
   return (
     <>
-      <section className="h-100 bg-light">
+      <section className="mh-100 bg-light">
         <div className="container h-auto px-2">
           <div className="row d-flex justify-content-center align-items-center h-100">
             <div className="col">
@@ -122,31 +122,11 @@ function Details({ movieDetail }) {
 
 export default Details;
 
-export async function getStaticPaths() {
-  const resp = await fetch(
-    "https://imdb-api.com/en/API/Top250Movies/k_5cpyi6x9"
-  );
-  const { items } = await resp.json();
-
-  const paths = items.map((item) => {
-    return {
-      params: {
-        details: `${item.fullTitle}/k_5cpyi6x9/${item.id}`,
-        id: `${item.id}`,
-      },
-    };
-  });
-
-  return {
-    paths,
-    fallback: true,
-  };
-}
-
-export async function getStaticProps(context) {
+export async function getServerSideProps(context) {
   const { params } = context;
   const { details } = params;
-  const detailsArray = details.split("+");
+  console.log(params)
+  const detailsArray = details.split(" ");
   console.log(detailsArray);
   const response = await fetch(
     `https://imdb-api.com/en/API/Title/k_5cpyi6x9/${detailsArray[1]}`

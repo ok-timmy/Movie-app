@@ -22,7 +22,7 @@ const Spinner = styled.div`
   }
 `;
 
-function MovieCard({ item, loggedInEmail }) {
+function SearchMovieCard({ item, loggedInEmail }) {
   const [UsersWL, setUsersWL] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isSelected, setIsSelected] = useState(true);
@@ -110,9 +110,9 @@ function MovieCard({ item, loggedInEmail }) {
           height={300}
         />
         <div className="card-body">
-          <h5 className="card-title">{item.fullTitle}</h5>
+          <h5 className="card-title">{item.title}</h5>
           <p className="card-text">{item.year}</p>
-          <Link href={`/latestmovies/${item.fullTitle}+${item.id}`}>
+          <Link href={`/search/${item.title}%20${item.id}`}>
             <a className="btn btn-light">View Details</a>
           </Link>{" "}
           {isLoading && UsersWL !== [] ? (
@@ -126,4 +126,4 @@ function MovieCard({ item, loggedInEmail }) {
   );
 }
 
-export default MovieCard;
+export default SearchMovieCard;

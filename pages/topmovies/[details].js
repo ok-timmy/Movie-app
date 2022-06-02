@@ -23,7 +23,7 @@ function Details({ movieDetail }) {
 
   return (
     <>
-      <section className="h-100 bg-light">
+      <section className="mh-100 bg-dark text-light">
         <div className="container h-auto px-2">
           <div className="row d-flex justify-content-center align-items-center h-100">
             <div className="col">

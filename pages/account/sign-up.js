@@ -28,7 +28,7 @@ export default function SignUp() {
 
 
   return (
-    <section className="h-100 py-5 mt-5">
+    <section className="h-100 py-5 mt-5 bg-dark text-light">
       <div className="mask d-flex align-items-center h-100 gradient-custom-3">
         <div className="container h-100">
           <div className="row d-flex justify-content-center align-items-center h-100">

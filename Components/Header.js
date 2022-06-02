@@ -9,11 +9,12 @@ import Image from "next/image";
 const HeaderWrapper = styled.div`
   width: 100vw;
   height: 12vh;
-  background-color: #f5f5f5;
+  background-color: #333637;
   position: fixed;
   top: 0;
   z-index: 1000;
   font-size: 15px;
+  justify-content: center;
 
   @media screen and (max-width: 600px) {
     height: 10vh;
@@ -43,6 +44,7 @@ const NavLinks = styled.li`
   align-items: center;
   padding-right: 20px;
   font-size: 0.9rem;
+  color: #3F84E5;
 
   @media screen and (max-width: 600px) {
     display: none;
@@ -76,7 +78,7 @@ const MobileNav = styled.div`
   height: 100%;
   left: 0px;
   position: fixed;
-  background: white;
+  background: #333637;
   z-index: 100000;
   top: 0px;
   padding-bottom: 10rem;
@@ -108,7 +110,7 @@ const ToggleIcon = styled.div`
     }
   }
   & {
-    background-color: ${(props) => (props.isMobileNav ? "transparent" : "")};
+    background-color: ${(props) => (props.isMobileNav ? "transparent" : "white")};
   }
   &::before,
   &::after {
@@ -116,6 +118,7 @@ const ToggleIcon = styled.div`
     position: absolute;
     transition: all 0.2s;
     top: 0px;
+    background-color: white;
   }
   &::before {
     top: ${(props) => (props.isMobileNav ? "0" : "-.8rem")};
@@ -175,7 +178,7 @@ function Header({navBarLinks}) {
     } else setTokenExist(false);
   }, [userData]);
 
-  console.log(log);
+  // console.log(log);
 
   
 
@@ -204,17 +207,18 @@ function Header({navBarLinks}) {
                   {active === navBarLink.name ? (
                     <i
                       className={navBarLink.filled}
-                      style={{ color: "blue" }}
+                      style={{ color: "#3F84E5" }}
                     ></i>
                   ) : (
                     <i
                       className={navBarLink.normal}
-                      style={{ color: "blue" }}
+                      style={{ color: "#3F84E5" }}
                     ></i>
                   )}
                   <Link href={navBarLink.link}>
                     <a
                       className="nav-link"
+                      style={{color:"#3F84E5",}}
                       onClick={() => setActive(navBarLink.name)}
                     >
                       {navBarLink.name}
@@ -306,14 +310,15 @@ function Header({navBarLinks}) {
           return (
             <MobileLink key={navBarLink.name}>
               {active === navBarLink.name ? (
-                <i className={navBarLink.filled} style={{ color: "blue" }}></i>
+                <i className={navBarLink.filled} style={{ color: "#3F84E5" }}></i>
               ) : (
-                <i className={navBarLink.normal} style={{ color: "blue" }}></i>
+                <i className={navBarLink.normal} style={{ color: "#3F84E5" }}></i>
               )}
               <Link href={navBarLink.link} passHref>
                 <a
                   className="nav-link"
                   onClick={() => setActive(navBarLink.name)}
+                  style={{ color: "#3F84E5" }}
                 >
                   {navBarLink.name}
                 </a>
