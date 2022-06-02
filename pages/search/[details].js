@@ -1,7 +1,6 @@
 import Image from "next/image";
 
 function Details({ movieDetail }) {
-  
   const {
     image,
     genreList,
@@ -96,18 +95,26 @@ function Details({ movieDetail }) {
                         <span className="text-muted"> {directors}</span>
                       </p>
 
-                     {similars.length !== 0 && <div className="col md-6">
-                        <h4 className="my-3">SIMILAR:</h4>
-                        <div className="d-flex flex-wrap row">
-                          {similars.map((s) => {
-                            return <div key={s.id} className='col-4 col-md- pb-4'>
-                              <Image src={s.image} alt={s.image} width={200} height={200}/>
-                              {s.title}
-                              </div>;
-                          })}
+                      {similars.length !== 0 && (
+                        <div className="col md-6">
+                          <h4 className="my-3">SIMILAR:</h4>
+                          <div className="d-flex flex-wrap row">
+                            {similars.map((s) => {
+                              return (
+                                <div key={s.id} className="col-4 col-md- pb-4">
+                                  <Image
+                                    src={s.image}
+                                    alt={s.image}
+                                    width={200}
+                                    height={200}
+                                  />
+                                  {s.title}
+                                </div>
+                              );
+                            })}
+                          </div>
                         </div>
-                      </div>}
-
+                      )}
                     </div>
                   </div>
                 </div>
@@ -125,7 +132,7 @@ export default Details;
 export async function getServerSideProps(context) {
   const { params } = context;
   const { details } = params;
-  console.log(params)
+  console.log(params);
   const detailsArray = details.split(" ");
   console.log(detailsArray);
   const response = await fetch(

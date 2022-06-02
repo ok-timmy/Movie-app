@@ -9,7 +9,7 @@ const Index = ({ movies }) => {
   useEffect(() => {
     const activeUser = sessionStorage.getItem("UserDatabase");
     const activeU = JSON.parse(activeUser);
-    console.log(activeU);
+    // console.log(activeU);
     if (activeUser) {
       setLoggedInEmail(activeU.email);
     }

@@ -1,11 +1,6 @@
 import Image from "next/image";
 
 function Details({ movieDetail }) {
-  // const {items} = movieDetail;
-  // console.log(movieDetail);
-  // const {id} = movieDetail;
-  // console.log(myData);
-  // console.log(id)
   const {
     image,
     genreList,
@@ -135,9 +130,7 @@ function Details({ movieDetail }) {
 export default Details;
 
 export async function getStaticPaths() {
-  const resp = await fetch(
-    "https://imdb-api.com/en/API/Top250TVs/k_5cpyi6x9"
-  );
+  const resp = await fetch("https://imdb-api.com/en/API/Top250TVs/k_5cpyi6x9");
   const { items } = await resp.json();
   // console.log(items);
 
@@ -145,7 +138,7 @@ export async function getStaticPaths() {
     return {
       params: {
         details: `${item.fullTitle}/k_5cpyi6x9/${item.id}`,
-        id: `${item.id}`
+        id: `${item.id}`,
       },
     };
   });

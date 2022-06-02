@@ -1,11 +1,6 @@
 import Image from "next/image";
 
 function Details({ movieDetail }) {
-  // const {items} = movieDetail;
-  // console.log(movieDetail);
-  // const {id} = movieDetail;
-  // console.log(myData);
-  // console.log(id)
   const {
     image,
     genreList,
@@ -145,7 +140,7 @@ export async function getStaticPaths() {
     return {
       params: {
         details: `${item.fullTitle}/k_5cpyi6x9/${item.id}`,
-        id: `${item.id}`
+        id: `${item.id}`,
       },
     };
   });

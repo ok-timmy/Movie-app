@@ -11,7 +11,7 @@ const Index = ({ movies }) => {
   useEffect(() => {
     const activeUser = sessionStorage.getItem("UserDatabase");
     const activeU = JSON.parse(activeUser);
-    console.log(activeU);
+    // console.log(activeU);
     if (activeUser) {
       setLoggedInEmail(activeU.email);
     }
@@ -55,7 +55,6 @@ export async function getServerSideProps(context) {
   console.log(query.query);
   // const path = router.pathname
   const resp = await fetch(
-    // "https://imdb-api.com/en/API/Top250TVs/k_5cpyi6x9"
     `https://imdb-api.com/en/API/SearchTitle/k_5cpyi6x9/${query.query}`
   );
   const data = await resp.json();

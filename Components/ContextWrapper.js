@@ -5,7 +5,6 @@ import { GetUserData } from "../src/auth/fetchUser";
 export function ContextWrapper ({children}) {
 
     const [userData, setUserData] = useState({});
-    const [log, setLog] = useState()
     const login = (data, token) =>{
         sessionStorage.setItem("User", JSON.stringify(data));
         sessionStorage.setItem("Token", token);
@@ -17,13 +16,6 @@ export function ContextWrapper ({children}) {
         setUserData({})
     }
 
-    const setData = () => {
-        const loggedIn = sessionStorage.getItem("UserDatabase");
-        if(loggedIn) {
-            const LoggedInUser = JSON.parse(loggedIn);
-            setLog(LoggedInUser);
-        }
-    }
 
     const logout = (goHome)=> {
         clearData();
@@ -33,7 +25,7 @@ export function ContextWrapper ({children}) {
     }
 
     return (
-        <userContext.Provider value={{userData, login, logout, setLog, setData, log}}>
+        <userContext.Provider value={{userData, login, logout}}>
             {children}
         </userContext.Provider>
     )

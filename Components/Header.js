@@ -44,7 +44,7 @@ const NavLinks = styled.li`
   align-items: center;
   padding-right: 20px;
   font-size: 0.9rem;
-  color: #3F84E5;
+  color: #3f84e5;
 
   @media screen and (max-width: 600px) {
     display: none;
@@ -110,7 +110,8 @@ const ToggleIcon = styled.div`
     }
   }
   & {
-    background-color: ${(props) => (props.isMobileNav ? "transparent" : "white")};
+    background-color: ${(props) =>
+      props.isMobileNav ? "transparent" : "white"};
   }
   &::before,
   &::after {
@@ -147,15 +148,19 @@ const Spinner = styled.div`
   }
 `;
 
-function Header({navBarLinks}) {
+function Header({ navBarLinks }) {
   const [active, setActive] = useState();
   const [tokenExist, setTokenExist] = useState(false);
   const [LoggedInUser, setLoggedInUser] = useState(null);
-  const { userData, logout, setLog, log, setData } = useContext(userContext);
+  const { userData, logout, setData } = useContext(userContext);
   const [isLoading, setIsLoading] = useState(true);
+  const [isMobileNav, setIsMobileNav] = useState(false);
+
   const router = useRouter();
 
-  const [isMobileNav, setIsMobileNav] = useState(false);
+  const pathname = router.pathname;
+  // console.log(pathname);
+
   const node = useRef();
 
   const onToggleMobileNav = useCallback(() => {
@@ -165,22 +170,20 @@ function Header({navBarLinks}) {
   }, [isMobileNav]);
 
   useEffect(() => {
+    setActive(pathname);
+  }, [pathname]);
+
+  useEffect(() => {
     const token = sessionStorage.getItem("Token");
     if (token) {
       const sessionUser = sessionStorage.getItem("User");
       const user = JSON.parse(sessionUser);
-      console.log(user);
+      // console.log(user);
       setTokenExist(true);
       setLoggedInUser(user);
-      setData();
-      setIsLoading(false)
-      setLog(sessionUser);
+      setIsLoading(false);
     } else setTokenExist(false);
   }, [userData]);
-
-  // console.log(log);
-
-  
 
   return (
     <>
@@ -204,7 +207,7 @@ function Header({navBarLinks}) {
             {navBarLinks.map((navBarLink) => {
               return (
                 <NavLinks key={navBarLink.name}>
-                  {active === navBarLink.name ? (
+                  {active === navBarLink.link ? (
                     <i
                       className={navBarLink.filled}
                       style={{ color: "#3F84E5" }}
@@ -218,8 +221,8 @@ function Header({navBarLinks}) {
                   <Link href={navBarLink.link}>
                     <a
                       className="nav-link"
-                      style={{color:"#3F84E5",}}
-                      onClick={() => setActive(navBarLink.name)}
+                      style={{ color: "#3F84E5" }}
+                      onClick={() => setActive(navBarLink.link)}
                     >
                       {navBarLink.name}
                     </a>
@@ -244,18 +247,24 @@ function Header({navBarLinks}) {
             </NavList>
           ) : (
             <NavList>
-              { isLoading? <Spinner/> : <NavLinks>
-                <Link href="/account/profile" passHref >
-                  <a><Image
-                    src={LoggedInUser.photoURL}
-                    alt={"Profile-picture"}
-                    width={40}
-                    height={40}
-                    style={{ borderRadius: "50%" }}
-                    onClick={() => setActive()}
-                  /></a>
-                </Link>
-              </NavLinks>}
+              {isLoading ? (
+                <Spinner />
+              ) : (
+                <NavLinks>
+                  <Link href="/account/profile" passHref>
+                    <a>
+                      <Image
+                        src={LoggedInUser.photoURL}
+                        alt={"Profile-picture"}
+                        width={40}
+                        height={40}
+                        style={{ borderRadius: "50%" }}
+                        onClick={() => setActive()}
+                      />
+                    </a>
+                  </Link>
+                </NavLinks>
+              )}
               <NavLinks>
                 <Button onClick={() => logout(router.push("/"))}>
                   Sign out
@@ -279,15 +288,18 @@ function Header({navBarLinks}) {
           <>
             {LoggedInUser && (
               <MobileLink>
-                <Link href="/account/profile" passHref >
-                 <a> <Image
-                    src={LoggedInUser.photoURL}
-                    alt={"Profile-picture"}
-                    width={40}
-                    height={40}
-                    style={{ borderRadius: "50%" }}
-                    onClick={()=> setActive()}
-                  /> </a>
+                <Link href="/account/profile" passHref>
+                  <a>
+                    {" "}
+                    <Image
+                      src={LoggedInUser.photoURL}
+                      alt={"Profile-picture"}
+                      width={40}
+                      height={40}
+                      style={{ borderRadius: "50%" }}
+                      onClick={() => setActive()}
+                    />{" "}
+                  </a>
                 </Link>
               </MobileLink>
             )}
@@ -309,15 +321,21 @@ function Header({navBarLinks}) {
         {navBarLinks.map((navBarLink) => {
           return (
             <MobileLink key={navBarLink.name}>
-              {active === navBarLink.name ? (
-                <i className={navBarLink.filled} style={{ color: "#3F84E5" }}></i>
+              {active === navBarLink.link ? (
+                <i
+                  className={navBarLink.filled}
+                  style={{ color: "#3F84E5" }}
+                ></i>
               ) : (
-                <i className={navBarLink.normal} style={{ color: "#3F84E5" }}></i>
+                <i
+                  className={navBarLink.normal}
+                  style={{ color: "#3F84E5" }}
+                ></i>
               )}
               <Link href={navBarLink.link} passHref>
                 <a
                   className="nav-link"
-                  onClick={() => setActive(navBarLink.name)}
+                  onClick={() => setActive(navBarLink.link)}
                   style={{ color: "#3F84E5" }}
                 >
                   {navBarLink.name}

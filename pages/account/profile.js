@@ -127,9 +127,9 @@ function Profile() {
 
  useEffect(() => {
   const sessionUser = sessionStorage.getItem("UserDatabase");
-  console.log(sessionUser);
+  // console.log(sessionUser);
   const myuser = JSON.parse(sessionUser);
-  console.log(sessionUser);
+  // console.log(sessionUser);
   setUser(myuser);
   setIsLoading(false);
  }, [user])
