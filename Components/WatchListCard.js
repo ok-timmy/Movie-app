@@ -10,7 +10,6 @@ height: auto;
 display: flex;
 flex-direction: column;
 justify-content: space-between;
-border: solid 2px green
 `;
 
 const CardImg = styled.div`
@@ -41,7 +40,7 @@ cursor: pointer;
 function WatchListCard({card, email}) {
     console.log(card);
   return (
-    <Card>
+    <Card className="rounded shadow">
     <CardImg>
       <Image src={card.image} alt="next" width={250} height={250} />
     </CardImg>

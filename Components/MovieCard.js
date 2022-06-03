@@ -54,6 +54,7 @@ function MovieCard({ item, loggedInEmail }) {
           // setIsSelected(true);
           isFound = (
             <button
+            className="btn btn-light"
               onClick={() => {
                 removeFromWatchList(
                   item,
@@ -69,6 +70,7 @@ function MovieCard({ item, loggedInEmail }) {
           // setIsSelected(false)
           isFound = (
             <button
+            className="btn btn-light"
               onClick={() => {
                 addToWatchList(
                   item,
@@ -86,6 +88,7 @@ function MovieCard({ item, loggedInEmail }) {
     } else {
       isFound = (
         <button
+        className="btn btn-light"
           onClick={() => {
             addToWatchList(item, loggedInEmail, router);
           }}
@@ -100,7 +103,7 @@ function MovieCard({ item, loggedInEmail }) {
 
   return (
     <div className="col">
-      <div className="card mb-5 shadow rounded" style={{ width: "20rem", height: "25rem" }}>
+      <div className="card mb-5 shadow rounded bg-dark" style={{ width: "20rem", height: "25rem" }}>
         <Image
           responsive={"100vw"}
           src={item.image}

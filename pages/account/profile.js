@@ -6,14 +6,14 @@ import userContext from "../../Context/context";
 import Empty from "../../public/Empty-cuate.png";
 
 const ProfilePage = styled.div`
-  padding: 4rem 15% 0;
+  padding: 4rem 15% 2rem;
   min-height: 90vh;
   margin: 0 auto ;
   background: black;
   color: white;
 
   @media only screen and (max-width: 600px) {
-    width: 90vw;
+    width: 100vw;
   }
 `;
 
@@ -24,11 +24,7 @@ const ProfileDetails = styled.div`
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  border: 2px solid red;
   min-height: 30vh;
-  box-shadow: 10px 10px 5px 0px rgba(242, 242, 242, 0.75);
-  -webkit-box-shadow: 10px 10px 5px 0px rgba(242, 242, 242, 0.75);
-  -moz-box-shadow: 10px 10px 5px 0px rgba(242, 242, 242, 0.75);
 `;
 
 const ProfileEmail = styled.div`
@@ -46,8 +42,6 @@ const ProfilePicture = styled.div`
   border-radius: 50%;
 `;
 
-//
-
 const ProfileInfo = styled.div`
   margin: 4rem auto 0;
   font-size: 2.2rem;
@@ -57,18 +51,18 @@ const ProfileInfo = styled.div`
 const FavouriteMovies = styled.div`
   align-items: center;
   margin-top: 2rem;
-  border: 2px solid red;
+  padding: 0.5rem 0 2rem;
   min-height: 30vh;
-  box-shadow: 10px 10px 5px 0px rgba(242, 242, 242, 0.75);
-  -webkit-box-shadow: 10px 10px 5px 0px rgba(242, 242, 242, 0.75);
-  -moz-box-shadow: 10px 10px 5px 0px rgba(242, 242, 242, 0.75);
+  @media only screen and (max-width: 600px) {
+  
+  }
 `;
 
 const Header = styled.p`
   text-align: center;
   font-size: 2rem;
   font-weight: 300;
-  padding-top: 0.6rem;
+  padding: 0.6rem 0;
 `;
 
 const Watchlist = styled.div`
@@ -79,7 +73,7 @@ const Watchlist = styled.div`
   grid-column-gap: 20px;
   grid-row-gap: 40px;
 
-  @media only screen and (max-width: 600px) {
+  @media only screen and (max-width: 480px) {
     align-items: center;
     grid-template-columns: 1fr;
     grid-row-gap: 80px;
@@ -96,6 +90,10 @@ const Photo = styled.div`
   width: 200px;
   height: 200px;
   align-self: center;
+  @media only screen and (max-width: 600px) {
+    width: 400px;
+    height: 400px;
+  }
 `;
 
 const Typography = styled.p`
@@ -140,7 +138,7 @@ function Profile() {
     <>{
       isLoading? <Spinner/> :
       <ProfilePage>
-        <ProfileDetails>
+        <ProfileDetails className="bg-dark rounded shadow">
           <ProfilePicture>
             <Image
               src={user.profilePicture}
@@ -154,7 +152,7 @@ function Profile() {
           <ProfileEmail>{user.email}</ProfileEmail>
         </ProfileDetails>
 
-        <FavouriteMovies>
+        <FavouriteMovies className="bg-dark rounded">
           <Header>My Watchlist</Header>
           {isLoading ? (
             <Spinner />

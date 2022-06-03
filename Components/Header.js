@@ -46,6 +46,10 @@ const NavLinks = styled.li`
   font-size: 0.9rem;
   color: #3f84e5;
 
+  :hover {
+    border-bottom: 1px solid #00a0f6;
+  }
+
   @media screen and (max-width: 600px) {
     display: none;
   }
@@ -54,13 +58,10 @@ const NavLinks = styled.li`
 const Button = styled.button`
   border: none;
   outline: none;
-  color: #845ec2;
+  color: #3f84e5;
   font-size: 1rem;
   background: transparent;
 
-  :hover {
-    color: blue;
-  }
   @media screen and (max-width: 600px) {
     font-size: 1.2rem;
   }
@@ -236,12 +237,22 @@ function Header({ navBarLinks }) {
             <NavList>
               <NavLinks>
                 <Link href="/account/sign-in" passHref>
-                  <a onClick={() => setActive()}>Sign In</a>
+                  <a
+                    className="text-decoration-none"
+                    onClick={() => setActive()}
+                  >
+                    Sign In
+                  </a>
                 </Link>
               </NavLinks>
               <NavLinks>
                 <Link href="/account/sign-up" passHref>
-                  <a onClick={() => setActive()}>Sign Up</a>
+                  <a
+                    className="text-decoration-none"
+                    onClick={() => setActive()}
+                  >
+                    Sign Up
+                  </a>
                 </Link>
               </NavLinks>
             </NavList>
@@ -308,12 +319,16 @@ function Header({ navBarLinks }) {
           <>
             <MobileLink>
               <Link href="/account/sign-in" passHref>
-                <a onClick={() => setActive()}>Sign In</a>
+                <a className="text-decoration-none" onClick={() => setActive()}>
+                  Sign In
+                </a>
               </Link>
             </MobileLink>
             <MobileLink>
               <Link href="/account/sign-up" passHref>
-                <a onClick={() => setActive()}>Sign Up</a>
+                <a className="text-decoration-none" onClick={() => setActive()}>
+                  Sign Up
+                </a>
               </Link>
             </MobileLink>
           </>

@@ -20,6 +20,7 @@ const SearchSection = styled.div`
   display: flex;
   justify-content: space-evenly;
   align-items: center;
+  font-family: Zen Kaku Gothic New, sans-serif;
   background-image: linear-gradient(
     to left bottom,
     #3c762f,
@@ -127,7 +128,7 @@ export default function Home() {
     if (value === "") {
       alert("Please Provide A Movie Name");
     } else {
-      router.push(`search/${value}`);
+      router.push(`search/?query=${value}`);
     }
   };
 
@@ -143,8 +144,8 @@ export default function Home() {
           <div className="px-4 my-md-5 py-5 h-100">
             <div className="d-md-flex justify-content-md-between flex-xs-column">
               <div className="w-100 mb-4  w-md-50">
-                <h1 className="fs-1 mt-5 pt-5">Leave What to Watch To US</h1>
-                <p className="fs-5 w-md-75 pb-md-4">
+                <h1 className="fs-1 mt-5 pt-5" style={{fontFamily: 'Zen Kaku Gothic New, sans-serif'}}>Leave What to Watch To US</h1>
+                <p className="fs-5 w-md-75 pb-md-4" style={{fontFamily: 'Zen Kaku Gothic New, sans-serif'}}>
                   Lorem Ipsum has been the industry&apos;s standard dummy text
                   ever since the 1500s, when an unknown printer took a galley of
                   type and scrambled it to make a type specimen book. It has

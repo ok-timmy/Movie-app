@@ -20,8 +20,8 @@ function SignIn() {
   }, []);
 
   return (
-    <section className="vh-100 py-5 bg-dark text-light">
-      <div className="container py-5 h-100">
+    <section className="vh-100 py-4 bg-dark text-light">
+      <div className=" vh-100 container py-5 h-100">
         <div className="row d-flex justify-content-center align-items-center h-100">
           <div className="col-12 col-md-8 col-lg-6 col-xl-5">
             <div
@@ -43,8 +43,9 @@ function SignIn() {
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
                       placeholder="email"
+                      autoComplete="off"
                     />
-                    <label htmlFor="floatingInput" className="text-black">
+                    <label htmlFor="floatingInput" className="text-black" style={{fontFamily: 'Zen Kaku Gothic New, sans-serif'}}>
                       Email address
                     </label>
                   </div>
@@ -58,12 +59,12 @@ function SignIn() {
                       onChange={(e) => setPassword(e.target.value)}
                       placeholder="password"
                     />
-                    <label htmlFor="floatingPassword" className="text-black">
+                    <label htmlFor="floatingPassword" className="text-black" >
                       Password
                     </label>
                   </div>
 
-                  <p className="small mb-1 pb-lg-2">
+                  <p className="small mt-2 pb-lg-2">
                     <a className="text-white-50" href="#!">
                       Forgot password?
                     </a>
@@ -80,20 +81,15 @@ function SignIn() {
                     Login
                   </button>
 
-                  <div className="d-flex justify-content-center text-center mt-2 pt-1">
+                    <div className="d-flex justify-content-evenly text-center mt-2 pt-1">
                     <button
                       type="button"
                       className="btn btn-light"
                       onClick={() => SignedUpWithGoogle(router.isFallback, login)}
                     >
-                      <i className="bi bi-google"></i>
+                      <span className="px-3">Continue With Google</span>
+                      <i className="bi bi-google" style={{ color: "red" }}></i>
                     </button>
-                    <a href="#!" className="text-white">
-                      <i className="bi bi-twitter mx-4 px-2"></i>
-                    </a>
-                    <a href="#!" className="text-white">
-                      <i className="bi bi-github"></i>
-                    </a>
                   </div>
                 </div>
 
