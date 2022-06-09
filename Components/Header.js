@@ -43,8 +43,8 @@ const User = styled.span`
   color: white;
   background: #0081CF;
   border-radius: 50%;
-  height: 50px;
-  width: 50px;
+  height: 40px;
+  width: 40px;
   text-align: center;
   display: flex;
   flex-direction: column;
