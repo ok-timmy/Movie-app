@@ -1,24 +1,31 @@
 import Image from "next/image";
+import { useEffect } from "react";
 
 function Details({ movieDetail }) {
-  const {
-    image,
-    genreList,
-    countries,
-    directors,
-    keywordList,
-    similars,
-    starList,
-    actorList,
-    year,
-    writerList,
-    plot,
-    runtimeStr,
-    languages,
-    imDbRating,
-  } = movieDetail;
 
-  const slicedActorList = actorList.slice(0, 5);
+// useEffect(() => {
+// }, [])
+
+const {
+  image,
+  genreList,
+  countries,
+  directors,
+  keywordList,
+  similars,
+  starList,
+  actorList,
+  year,
+  writerList,
+  plot,
+  runtimeStr,
+  languages,
+  imDbRating,
+} = movieDetail;
+
+const slicedActorList = actorList.slice(0, 5);
+
+
 
   return (
     <>
