@@ -10,6 +10,7 @@ height: auto;
 display: flex;
 flex-direction: column;
 justify-content: space-between;
+background-color: rgba(3, 22, 37, 0.9);
 `;
 
 const CardImg = styled.div`
