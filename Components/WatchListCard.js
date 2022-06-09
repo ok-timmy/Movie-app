@@ -38,7 +38,7 @@ cursor: pointer;
 `
 
 function WatchListCard({card, email}) {
-    console.log(card);
+    // console.log(card);
   return (
     <Card className="rounded shadow">
     <CardImg>

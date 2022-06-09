@@ -42,6 +42,11 @@ const ProfilePicture = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+
+  @media only screen and (max-width: 900px) {
+    height: 100px;
+    width: 100px;
+  }
 `;
 
 const User = styled.span`
@@ -73,11 +78,16 @@ const Header = styled.p`
 
 const Watchlist = styled.div`
   margin: 1rem auto 2rem;
+  padding-bottom: 2rem;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-auto-rows: auto;
   grid-column-gap: 20px;
   grid-row-gap: 40px;
+
+  @media only screen and (max-width: 900px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
 
   @media only screen and (max-width: 600px) {
     margin: auto;

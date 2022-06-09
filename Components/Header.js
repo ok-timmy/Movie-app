@@ -4,7 +4,6 @@ import styled from "styled-components";
 import { useCallback, useContext, useEffect, useRef, useState } from "react";
 import { useRouter } from "next/router";
 import userContext from "../Context/context";
-import Image from "next/image";
 
 const HeaderWrapper = styled.div`
   width: 100vw;
@@ -44,7 +43,12 @@ const User = styled.span`
   color: white;
   background: #0081CF;
   border-radius: 50%;
-  padding: 10px 10px;
+  height: 50px;
+  width: 50px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   font-size: 1rem;
   cursor: pointer;
 `;
