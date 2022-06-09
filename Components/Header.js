@@ -44,7 +44,7 @@ const User = styled.span`
   color: white;
   background: #0081CF;
   border-radius: 50%;
-  padding: 10px 12px;
+  padding: 10px 10px;
   font-size: 1rem;
   cursor: pointer;
 `;

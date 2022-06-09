@@ -129,7 +129,7 @@ export default function SignUp() {
                         type="button"
                         className="btn btn-success btn-block btn-lg gradient-custom-4 text-body"
                         onClick={() => {
-                          SignUpWithEmail(name, email, password, router.push("/account/sign-in"));
+                          SignUpWithEmail(name, email, password, router);
                         }}
                         disabled={isDisabled}
                       >

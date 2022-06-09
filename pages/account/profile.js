@@ -30,16 +30,23 @@ const ProfileDetails = styled.div`
 const ProfileEmail = styled.div`
 font-size: 1rem;
 font-weight: 400;
+padding-bottom: 10px;
 `
 
 const ProfilePicture = styled.div`
-  position: absolute;
-  top: -35%;
-  right: 45%;
-  width: 100px;
-  height: 100px;
-  border: 2px solid red;
+  margin:auto;
+  width: 70px;
+  height: 70px;
+  background: #0081CF;
   border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+const User = styled.span`
+  color: white;
+  font-size: 2rem;
 `;
 
 const ProfileInfo = styled.div`
@@ -51,10 +58,9 @@ const ProfileInfo = styled.div`
 const FavouriteMovies = styled.div`
   align-items: center;
   margin-top: 2rem;
-  padding: 0.5rem 0 2rem;
-  min-height: 30vh;
+  min-height: 20vh;
   @media only screen and (max-width: 600px) {
-  
+  height: auto;
   }
 `;
 
@@ -73,8 +79,8 @@ const Watchlist = styled.div`
   grid-column-gap: 20px;
   grid-row-gap: 40px;
 
-  @media only screen and (max-width: 480px) {
-    align-items: center;
+  @media only screen and (max-width: 600px) {
+    margin: auto;
     grid-template-columns: 1fr;
     grid-row-gap: 80px;
   }
@@ -89,7 +95,7 @@ const EmptyList = styled.div`
 const Photo = styled.div`
   width: 200px;
   height: 200px;
-  align-self: center;
+  margin: 0 auto;
   @media only screen and (max-width: 600px) {
     width: 400px;
     height: 400px;
@@ -140,9 +146,9 @@ function Profile() {
       <ProfilePage>
         <ProfileDetails className="bg-dark rounded shadow">
           <ProfilePicture>
-           {user && <span>{user.profilePicture}</span>}
+           {user && <User>{user.profilePicture}</User>}
           </ProfilePicture>
-         {user && <ProfileInfo>{user.displayName}</ProfileInfo>}
+         {user && <ProfileInfo>{user.name}</ProfileInfo>}
          {user && <ProfileEmail>{user.email}</ProfileEmail>}
         </ProfileDetails>
 

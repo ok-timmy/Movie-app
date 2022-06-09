@@ -74,7 +74,7 @@ function SignIn() {
                     className="btn btn-outline-light btn-lg px-5"
                     type="button"
                     onClick={() => {
-                      SignInWithEmail(email, password, router, login),
+                      SignInWithEmail(email, password, router.push('/'), login),
                         console.log("btn clicked");
                     }}
                   >
@@ -85,7 +85,7 @@ function SignIn() {
                     <button
                       type="button"
                       className="btn btn-light"
-                      onClick={() => SignedUpWithGoogle(router.isFallback, login)}
+                      onClick={() => SignedUpWithGoogle(router.push('/account/profile'), login)}
                     >
                       <span className="px-3">Continue With Google</span>
                       <i className="bi bi-google" style={{ color: "red" }}></i>
