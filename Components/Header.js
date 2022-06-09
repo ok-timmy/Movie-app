@@ -16,6 +16,9 @@ const HeaderWrapper = styled.div`
   font-size: 15px;
   justify-content: center;
 
+  @media screen and (max-width: 960px) {
+    height: 8vh;
+  }
   @media screen and (max-width: 600px) {
     height: 10vh;
   }
@@ -35,6 +38,15 @@ const NavList = styled.ul`
   @media screen and (max-width: 600px) {
     display: none;
   }
+`;
+
+const User = styled.span`
+  color: white;
+  background: #0081CF;
+  border-radius: 50%;
+  padding: 10px 12px;
+  font-size: 1rem;
+  cursor: pointer;
 `;
 
 const NavLinks = styled.li`
@@ -177,9 +189,9 @@ function Header({ navBarLinks }) {
   useEffect(() => {
     const token = sessionStorage.getItem("Token");
     if (token) {
-      const sessionUser = sessionStorage.getItem("User");
+      const sessionUser = sessionStorage.getItem("UserDatabase");
       const user = JSON.parse(sessionUser);
-      // console.log(user);
+      console.log(user);
       setTokenExist(true);
       setLoggedInUser(user);
       setIsLoading(false);
@@ -263,16 +275,11 @@ function Header({ navBarLinks }) {
               ) : (
                 <NavLinks>
                   <Link href="/account/profile" passHref>
-                    <a>
-                      <Image
-                        src={LoggedInUser.photoURL}
-                        alt={"Profile-picture"}
-                        width={40}
-                        height={40}
-                        style={{ borderRadius: "50%" }}
-                        onClick={() => setActive()}
-                      />
-                    </a>
+                    
+                      <User onClick={() => setActive()}>
+                        {LoggedInUser.profilePicture}
+                      </User>
+                    
                   </Link>
                 </NavLinks>
               )}
@@ -301,15 +308,9 @@ function Header({ navBarLinks }) {
               <MobileLink>
                 <Link href="/account/profile" passHref>
                   <a>
-                    {" "}
-                    <Image
-                      src={LoggedInUser.photoURL}
-                      alt={"Profile-picture"}
-                      width={40}
-                      height={40}
-                      style={{ borderRadius: "50%" }}
-                      onClick={() => setActive()}
-                    />{" "}
+                    <User onClick={() => setActive()}>
+                      {LoggedInUser.profilePicture}
+                    </User>
                   </a>
                 </Link>
               </MobileLink>

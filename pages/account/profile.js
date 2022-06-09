@@ -140,23 +140,17 @@ function Profile() {
       <ProfilePage>
         <ProfileDetails className="bg-dark rounded shadow">
           <ProfilePicture>
-            <Image
-              src={user.profilePicture}
-              alt="Profile-pic"
-              width={100}
-              height={100}
-              style={{ borderRadius: "50%" }}
-            />
+           {user && <span>{user.profilePicture}</span>}
           </ProfilePicture>
-          <ProfileInfo>{user.displayName}</ProfileInfo>
-          <ProfileEmail>{user.email}</ProfileEmail>
+         {user && <ProfileInfo>{user.displayName}</ProfileInfo>}
+         {user && <ProfileEmail>{user.email}</ProfileEmail>}
         </ProfileDetails>
 
         <FavouriteMovies className="bg-dark rounded">
           <Header>My Watchlist</Header>
           {isLoading ? (
             <Spinner />
-          ) : (user.favouritesMovies.length !== 0 ? (
+          ) : (user && user.favouritesMovies.length !== 0 ? (
             <Watchlist>
               {user.favouritesMovies.map((w) => {
                 return <WatchListCard card={w} item={w.id} key={w.id} email={user.email}/>;

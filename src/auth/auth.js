@@ -7,18 +7,18 @@ import {
   createUserWithEmailAndPassword,
 } from "firebase/auth";
 import { collection, doc, setDoc } from "firebase/firestore";
-import { GetUserData } from "./fetchUser";
+import { adduser, GetUserData } from "./fetchUser";
 
 
 
-export function SignInWithEmail(_email, _password, router) {
+export function SignInWithEmail(_email, _password, router, login) {
   const auth = getAuth();
   signInWithEmailAndPassword(auth, _email, _password)
-    .then((userCredential) => {
+    .then( async (userCredential) => {
       // Signed in
       const user = userCredential.user;
-      GetUserData(user.email);
-      login(user, user.providerId )
+      const userDatabase = await GetUserData(user);
+      login(user, userDatabase, user.providerId );
       router.fallback();
     })
     .catch((error) => {
@@ -37,7 +37,7 @@ export function SignUpWithEmail(_name, _email, _password, router) {
       // const user = userCredential.user;
       console.log(userCredential);
       adduser(_name, _email); // Create a new Document for the new user to the database
-      router.push("/account/sign-in");
+      router;
     })
     .catch((error) => {
       console.log(error.code);
@@ -52,7 +52,7 @@ export function SignedUpWithGoogle(router, login) {
   const auth = getAuth();
 
   signInWithPopup(auth, provider)
-    .then((result) => {
+    .then( async (result) => {
       // console.log(auth);
       // This gives you a Google Access Token. You can use it to access the Google API.
       const credential = GoogleAuthProvider.credentialFromResult(result);
@@ -61,7 +61,8 @@ export function SignedUpWithGoogle(router, login) {
       const user = result.user;
       // console.log(token);
       console.log(user);
-      login(user, token);
+      const userDatabase = await GetUserData(user)
+      login(user, userDatabase, token);
       router;
     })
     .catch((error) => {

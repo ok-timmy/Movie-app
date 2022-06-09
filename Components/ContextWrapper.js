@@ -5,11 +5,12 @@ import { GetUserData } from "../src/auth/fetchUser";
 export function ContextWrapper ({children}) {
 
     const [userData, setUserData] = useState({});
-    const login = (data, token) =>{
+    const login = (data, dataTwo, token) =>{
         sessionStorage.setItem("User", JSON.stringify(data));
         sessionStorage.setItem("Token", token);
         GetUserData(data);
-        setUserData(data);
+        setUserData(dataTwo);
+        console.log(dataTwo);
     }
 
     const clearData = () => {
@@ -18,14 +19,14 @@ export function ContextWrapper ({children}) {
 
 
     const logout = (goHome)=> {
+        goHome;
         clearData();
         console.log(userData);
         sessionStorage.clear();
-        goHome;
     }
 
     return (
-        <userContext.Provider value={{userData, login, logout}}>
+        <userContext.Provider value={{userData, login, logout, setUserData}}>
             {children}
         </userContext.Provider>
     )

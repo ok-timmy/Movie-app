@@ -74,7 +74,7 @@ function SignIn() {
                     className="btn btn-outline-light btn-lg px-5"
                     type="button"
                     onClick={() => {
-                      SignInWithEmail(email, password, router),
+                      SignInWithEmail(email, password, router, login),
                         console.log("btn clicked");
                     }}
                   >
