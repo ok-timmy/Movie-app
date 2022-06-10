@@ -55,7 +55,6 @@ export async function getServerSideProps(context) {
   // console.log(context);
   const query = context.query;
   console.log(query.query);
-  // const path = router.pathname
   const resp = await fetch(
     `https://imdb-api.com/en/API/SearchTitle/k_5cpyi6x9/${query.query}`
   );

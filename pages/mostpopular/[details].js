@@ -1,12 +1,9 @@
 import Image from "next/image";
-import { useEffect } from "react";
 
 function Details({ movieDetail }) {
 
-// useEffect(() => {
-// }, [])
-
 const {
+  title,
   image,
   genreList,
   countries,
@@ -46,7 +43,7 @@ const slicedActorList = actorList.slice(0, 5);
                   </div>
                   <div className="col-xl-6 overflow-scroll-y">
                     <div className="card-body  text-black">
-                      <h2 className=" text-uppercase">{movieDetail.title}</h2>
+                      <h2 className=" text-uppercase">{title}</h2>
                       <p className="text-muted">
                         <span>
                           {year} /{" "}
@@ -136,43 +133,17 @@ const slicedActorList = actorList.slice(0, 5);
 
 export default Details;
 
-export async function getStaticPaths() {
+export async function getServerSideProps(context) {
+  const pros = context.params;
+  const detail = pros.details
+  const usedDetail = detail.split("&")[1];
+  // console.log(usedDetail);
   const resp = await fetch(
-    "https://imdb-api.com/en/API/MostPopularTVs/k_5cpyi6x9"
+    `https://imdb-api.com/en/API/Title/k_5cpyi6x9/${usedDetail}`
   );
-  const { items } = await resp.json();
-  // console.log(items);
-
-  const paths = items.map((item) => {
-    return {
-      params: {
-        details: `${item.fullTitle}/k_5cpyi6x9/${item.id}`,
-        id: `${item.id}`,
-      },
-    };
-  });
-  // console.log(paths);
+  const data = await resp.json();
 
   return {
-    paths,
-    fallback: true,
-  };
-}
-
-export async function getStaticProps(context) {
-  const { params } = context;
-  const { details } = params;
-  const detailsArray = details.split("+");
-  console.log(detailsArray);
-  const response = await fetch(
-    `https://imdb-api.com/en/API/Title/k_5cpyi6x9/${detailsArray[1]}`
-  );
-  const data = await response.json();
-  console.log(data);
-
-  return {
-    props: {
-      movieDetail: data,
-    },
+    props: { movieDetail: data },
   };
 }
