@@ -24,11 +24,11 @@ function Details({ movieDetail }) {
 
   return (
     <>
-      <section className="mh-100 bg-dark text-light">
-        <div className="container h-auto px-2">
+      <section className="mh-100 bg-dark text-light mt-4 pt-5">
+        <div className="container h-auto px-2 bg-dark text-light">
           <div className="row d-flex justify-content-center align-items-center h-100">
             <div className="col">
-              <div className="card card-registration my-2">
+              <div className="card card-registration my-2 text-light">
                 <div className="row g-0">
                   <div className="col-xl-6 d-xl-block">
                     <Image

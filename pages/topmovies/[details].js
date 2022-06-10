@@ -24,11 +24,11 @@ const slicedActorList = actorList.slice(0, 5);
 
   return (
     <>
-      <section className="mh-100 bg-dark text-light">
-        <div className="container h-auto px-2">
-          <div className="row d-flex justify-content-center align-items-center h-100">
-            <div className="col">
-              <div className="card card-registration my-2">
+      <section className="mh-100 bg-dark text-light mt-4 pt-5">
+        <div className="container h-auto px-2 rounded shadow">
+          <div className="row d-flex justify-content-center align-items-center h-100 bg-dark text-light">
+            <div className="col text-light">
+              <div className="card card-registration my-2"  style={{background: "#292B2F"}}>
                 <div className="row g-0">
                   <div className="col-xl-6 d-xl-block">
                     <Image
@@ -40,7 +40,7 @@ const slicedActorList = actorList.slice(0, 5);
                     />
                   </div>
                   <div className="col-xl-6 overflow-scroll-y">
-                    <div className="card-body  text-black">
+                    <div className="card-body  text-light">
                       <h2 className=" text-uppercase">{title}</h2>
                       <p className="text-muted">
                         <span>

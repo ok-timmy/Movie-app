@@ -26,11 +26,11 @@ const slicedActorList = actorList.slice(0, 5);
 
   return (
     <>
-      <section className="mh-100 bg-dark text-light">
-        <div className="container h-auto px-2">
+      <section className="mh-100 bg-dark mt-4 pt-5">
+        <div className="container h-auto mt-3 rounded shadow">
           <div className="row d-flex justify-content-center align-items-center h-100">
-            <div className="col">
-              <div className="card card-registration my-2">
+            <div className="col text-light">
+              <div className="card card-registration my-2" style={{background: "#292B2F"}}>
                 <div className="row g-0">
                   <div className="col-xl-6 d-xl-block">
                     <Image
@@ -42,9 +42,9 @@ const slicedActorList = actorList.slice(0, 5);
                     />
                   </div>
                   <div className="col-xl-6 overflow-scroll-y">
-                    <div className="card-body  text-black">
-                      <h2 className=" text-uppercase">{title}</h2>
-                      <p className="text-muted">
+                    <div className="card-body text-light">
+                      <h2 className=" text-uppercase text-light">{title}</h2>
+                      <p className="text-muted text-light">
                         <span>
                           {year} /{" "}
                           {genreList.map((g) => {
@@ -53,11 +53,11 @@ const slicedActorList = actorList.slice(0, 5);
                         </span>
                         <span>{runtimeStr}</span>
                       </p>
-                      <p>
+                      <p className="text-light">
                         Rating: <span>{imDbRating}</span>
                       </p>
-                      <div className="col">
-                        <h4>THE CAST</h4>
+                      <div className="col text-light">
+                        <h4 className="text-light">THE CAST</h4>
                         <div className="row">
                           {slicedActorList.map((star) => {
                             return (
@@ -80,27 +80,27 @@ const slicedActorList = actorList.slice(0, 5);
                           })}
                         </div>
                       </div>
-                      <div className="col">
+                      <div className="col text-light">
                         <h3>SYNOPSIS</h3>
-                        <p className="text-muted" style={{ fontSize: "15px" }}>
+                        <p className=" text-light" style={{ fontSize: "15px" }}>
                           {plot}
                         </p>
                       </div>
 
-                      <p>
+                      <p className="text-light">
                         {" "}
                         Languages:
                         <span className="text-muted"> {languages}</span>
                       </p>
 
-                      <p>
+                      <p className="text-light">
                         {" "}
                         Directors:
                         <span className="text-muted"> {directors}</span>
                       </p>
 
                       {similars.length !== 0 && (
-                        <div className="col md-6">
+                        <div className="col md-6 text-light">
                           <h4 className="my-3">SIMILAR:</h4>
                           <div className="d-flex flex-wrap row">
                             {similars.map((s) => {

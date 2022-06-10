@@ -22,11 +22,11 @@ function Details({ movieDetail }) {
 
   return (
     <>
-      <section className="mh-100 bg-light">
-        <div className="container h-auto px-2">
+      <section className="mh-100 bg-light mt-4 pt-5">
+        <div className="container h-auto px-2 rounded shadow">
           <div className="row d-flex justify-content-center align-items-center h-100">
             <div className="col">
-              <div className="card card-registration my-2">
+              <div className="card card-registration my-2" style={{background: "#292B2F"}}>
                 <div className="row g-0">
                   <div className="col-xl-6 d-xl-block">
                     <Image
@@ -38,7 +38,7 @@ function Details({ movieDetail }) {
                     />
                   </div>
                   <div className="col-xl-6 overflow-scroll-y">
-                    <div className="card-body  text-black">
+                    <div className="card-body text-light">
                       <h2 className=" text-uppercase">{movieDetail.title}</h2>
                       <p className="text-muted">
                         <span>
@@ -52,7 +52,7 @@ function Details({ movieDetail }) {
                       <p>
                         Rating: <span>{imDbRating}</span>
                       </p>
-                      <div className="col">
+                      <div className="col text-light">
                         <h4>THE CAST</h4>
                         <div className="row">
                           {slicedActorList.map((star) => {
@@ -76,7 +76,7 @@ function Details({ movieDetail }) {
                           })}
                         </div>
                       </div>
-                      <div className="col">
+                      <div className="col text-light">
                         <h3>SYNOPSIS</h3>
                         <p className="text-muted" style={{ fontSize: "15px" }}>
                           {plot}
@@ -96,7 +96,7 @@ function Details({ movieDetail }) {
                       </p>
 
                       {similars.length !== 0 && (
-                        <div className="col md-6">
+                        <div className="col md-6 text-light">
                           <h4 className="my-3">SIMILAR:</h4>
                           <div className="d-flex flex-wrap row">
                             {similars.map((s) => {
