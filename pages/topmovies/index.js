@@ -30,7 +30,7 @@ const Index = ({ movies }) => {
       </Head>
 
       <div className="bg-dark text-white mh-100 mx-auto">
-        <h2 className="mt-5 pt-5 mx-3 mx-md-5 px-md-3 ">Top 250 Movies</h2>
+        <h2 className="mt-5 pt-5 mx-3 mx-md-5 px-md-3 ">Top Movies</h2>
 
         <div className="container mt-5 mx-auto">
           <div className="row mx-auto">

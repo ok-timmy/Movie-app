@@ -1,4 +1,5 @@
 import Image from "next/image";
+import styles from "../../styles/Rating.module.css";
 
 function Details({ movieDetail }) {
   const {
@@ -26,7 +27,10 @@ function Details({ movieDetail }) {
         <div className="container h-auto px-2 rounded shadow">
           <div className="row d-flex justify-content-center align-items-center h-100">
             <div className="col">
-              <div className="card card-registration my-2" style={{background: "#292B2F"}}>
+              <div
+                className="card card-registration my-2"
+                style={{ background: "#292B2F" }}
+              >
                 <div className="row g-0">
                   <div className="col-xl-6 d-xl-block">
                     <Image
@@ -50,7 +54,13 @@ function Details({ movieDetail }) {
                         <span>{runtimeStr}</span>
                       </p>
                       <p>
-                        Rating: <span>{imDbRating}</span>
+                        Rating:{" "}
+                        <span className={styles.stars__outer}>
+                          <span
+                            className={styles.stars__inner}
+                            style={{ width: `${imDbRating * 10}%` }}
+                          ></span>
+                        </span>
                       </p>
                       <div className="col text-light">
                         <h4>THE CAST</h4>
@@ -132,14 +142,14 @@ export default Details;
 export async function getServerSideProps(context) {
   const { params } = context;
   const { details } = params;
-  console.log(params);
+  // console.log(params);
   const detailsArray = details.split(" ");
-  console.log(detailsArray);
+  // console.log(detailsArray);
   const response = await fetch(
     `https://imdb-api.com/en/API/Title/k_5cpyi6x9/${detailsArray[1]}`
   );
   const data = await response.json();
-  console.log(data);
+  // console.log(data);
 
   return {
     props: {

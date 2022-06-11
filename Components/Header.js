@@ -235,11 +235,12 @@ function Header({ navBarLinks }) {
                       style={{ color: "#3F84E5" }}
                     ></i>
                   )}
-                  <Link href={navBarLink.link}>
+                  <Link href={`${navBarLink.link}`} passHref>
                     <a
                       className="nav-link"
                       style={{ color: "#3F84E5" }}
-                      onClick={() => setActive(navBarLink.link)}
+                      onClick={() => {setActive(navBarLink.link)
+                      router.push(`/${navBarLink.link}`)}}
                     >
                       {navBarLink.name}
                     </a>

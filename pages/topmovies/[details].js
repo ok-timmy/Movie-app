@@ -1,5 +1,5 @@
 import Image from "next/image";
-import styles from "../../styles/Rating.module.css"
+import styles from "../../styles/Rating.module.css";
 
 function Details({ movieDetail }) {
   const {
@@ -56,7 +56,10 @@ function Details({ movieDetail }) {
                       <p>
                         Rating:{" "}
                         <span className={styles.stars__outer}>
-                          <span className={styles.stars__inner} style={{width: `${imDbRating * 10}%`}}></span>
+                          <span
+                            className={styles.stars__inner}
+                            style={{ width: `${imDbRating * 10}%` }}
+                          ></span>
                         </span>
                         {/* <span></span> */}
                       </p>

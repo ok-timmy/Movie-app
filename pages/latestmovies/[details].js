@@ -1,8 +1,7 @@
 import Image from "next/image";
-import styles from "../../styles/Rating.module.css"
+import styles from "../../styles/Rating.module.css";
 
 function Details({ movieDetail }) {
-  
   const {
     title,
     image,
@@ -25,7 +24,6 @@ function Details({ movieDetail }) {
 
   console.log(genreList);
   console.log(movieDetail);
-  
 
   return (
     <>
@@ -33,7 +31,10 @@ function Details({ movieDetail }) {
         <div className="container h-auto px-2">
           <div className="row d-flex justify-content-center align-items-center h-100">
             <div className="col">
-              <div className="card card-registration my-2" style={{background: "#292B2F"}}>
+              <div
+                className="card card-registration my-2"
+                style={{ background: "#292B2F" }}
+              >
                 <div className="row g-0">
                   <div className="col-xl-6 d-xl-block">
                     <Image
@@ -57,32 +58,39 @@ function Details({ movieDetail }) {
                         <span>{runtimeStr}</span>
                       </p>
                       <p>
-                        Rating:  <span className={styles.stars__outer}>
-                          <span className={styles.stars__inner} style={{width: `${imDbRating * 10}%`}}></span>
+                        Rating:{" "}
+                        <span className={styles.stars__outer}>
+                          <span
+                            className={styles.stars__inner}
+                            style={{ width: `${imDbRating * 10}%` }}
+                          ></span>
                         </span>
                       </p>
                       <div className="col">
                         <h4>THE CAST</h4>
                         <div className="row">
                           {slicedActorList.map((star) => {
-                            if (star.image !== "https://imdb-api.com/images/original/nopicture.jpg")
-                            return (
-                              <div key={star.id} className="col mb-3">
-                                <Image
-                                  src={star.image}
-                                  alt={star.image}
-                                  width={100}
-                                  height={100}
-                                  style={{ borderRadius: "50%" }}
-                                />
-                                <span
-                                  className="d-flex justify-content-center text-center"
-                                  style={{ fontSize: "10px" }}
-                                >
-                                  {star.name}
-                                </span>
-                              </div>
-                            );
+                            if (
+                              star.image !==
+                              "https://imdb-api.com/images/original/nopicture.jpg"
+                            )
+                              return (
+                                <div key={star.id} className="col mb-3">
+                                  <Image
+                                    src={star.image}
+                                    alt={star.image}
+                                    width={100}
+                                    height={100}
+                                    style={{ borderRadius: "50%" }}
+                                  />
+                                  <span
+                                    className="d-flex justify-content-center text-center"
+                                    style={{ fontSize: "10px" }}
+                                  >
+                                    {star.name}
+                                  </span>
+                                </div>
+                              );
                           })}
                         </div>
                       </div>
@@ -139,17 +147,15 @@ function Details({ movieDetail }) {
 
 export default Details;
 
-
 export async function getServerSideProps(context) {
   const pros = context.params;
-  const detail = pros.details
+  const detail = pros.details;
   const usedDetail = detail.split("&")[1];
   // console.log(usedDetail);
   const resp = await fetch(
     `https://imdb-api.com/en/API/Title/k_5cpyi6x9/${usedDetail}`
   );
   const data = await resp.json();
-
 
   return {
     props: { movieDetail: data },
