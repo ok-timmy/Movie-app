@@ -1,0 +1,26 @@
+.stars__outer {
+    display: inline-block;
+    position: relative;
+    border: none;
+    font-family: "bootstrap-icons";
+    /* font-family: FontAwesome; */
+  }
+   
+  .stars__outer::before {
+    content: "\f588 \f588 \f588 \f588 \f588";
+  }
+   
+  .stars__inner {
+    position: absolute;
+    top: 0;
+    left: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    font-family: "bootstrap-icons";
+    width: 0;
+  }
+   
+  .stars__inner::before {
+    content: "\F586 \F586 \F586 \F586 \F586";
+    color: #f8ce0b;
+  }

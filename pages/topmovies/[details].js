@@ -1,26 +1,25 @@
 import Image from "next/image";
+import styles from "../../styles/Rating.module.css"
 
 function Details({ movieDetail }) {
-
-const {
-  title,
-  image,
-  genreList,
-  countries,
-  directors,
-  keywordList,
-  similars,
-  starList,
-  actorList,
-  year,
-  writerList,
-  plot,
-  runtimeStr,
-  languages,
-  imDbRating,
-} = movieDetail;
-const slicedActorList = actorList.slice(0, 5);
-
+  const {
+    title,
+    image,
+    genreList,
+    countries,
+    directors,
+    keywordList,
+    similars,
+    starList,
+    actorList,
+    year,
+    writerList,
+    plot,
+    runtimeStr,
+    languages,
+    imDbRating,
+  } = movieDetail;
+  const slicedActorList = actorList.slice(0, 5);
 
   return (
     <>
@@ -28,7 +27,10 @@ const slicedActorList = actorList.slice(0, 5);
         <div className="container h-auto px-2 rounded shadow">
           <div className="row d-flex justify-content-center align-items-center h-100 bg-dark text-light">
             <div className="col text-light">
-              <div className="card card-registration my-2"  style={{background: "#292B2F"}}>
+              <div
+                className="card card-registration my-2"
+                style={{ background: "#292B2F" }}
+              >
                 <div className="row g-0">
                   <div className="col-xl-6 d-xl-block">
                     <Image
@@ -52,35 +54,43 @@ const slicedActorList = actorList.slice(0, 5);
                         <span>{runtimeStr}</span>
                       </p>
                       <p>
-                        Rating: <span>{imDbRating}</span>
+                        Rating:{" "}
+                        <span className={styles.stars__outer}>
+                          <span className={styles.stars__inner} style={{width: `${imDbRating * 10}%`}}></span>
+                        </span>
+                        {/* <span></span> */}
                       </p>
                       <div className="col">
                         <h4>THE CAST</h4>
                         <div className="row">
                           {slicedActorList.map((star) => {
-                            return (
-                              <div key={star.id} className="col mb-3">
-                                <Image
-                                  src={star.image}
-                                  alt={star.image}
-                                  width={100}
-                                  height={100}
-                                  style={{ borderRadius: "50%" }}
-                                />
-                                <span
-                                  className="d-flex justify-content-center"
-                                  style={{ fontSize: "10px" }}
-                                >
-                                  {star.name}
-                                </span>
-                              </div>
-                            );
+                            if (
+                              star.image !==
+                              "https://imdb-api.com/images/original/nopicture.jpg"
+                            )
+                              return (
+                                <div key={star.id} className="col mb-3">
+                                  <Image
+                                    src={star.image}
+                                    alt={star.image}
+                                    width={100}
+                                    height={100}
+                                    style={{ borderRadius: "50%" }}
+                                  />
+                                  <span
+                                    className="d-flex justify-content-center"
+                                    style={{ fontSize: "10px" }}
+                                  >
+                                    {star.name}
+                                  </span>
+                                </div>
+                              );
                           })}
                         </div>
                       </div>
-                      <div className="col">
+                      <div className="col text-light">
                         <h3>SYNOPSIS</h3>
-                        <p className="text-muted" style={{ fontSize: "15px" }}>
+                        <p className="text-light" style={{ fontSize: "15px" }}>
                           {plot}
                         </p>
                       </div>
@@ -133,7 +143,7 @@ export default Details;
 
 export async function getServerSideProps(context) {
   const pros = context.params;
-  const detail = pros.details
+  const detail = pros.details;
   const usedDetail = detail.split("&")[1];
   // console.log(usedDetail);
   const resp = await fetch(

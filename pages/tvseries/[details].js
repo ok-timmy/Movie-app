@@ -1,4 +1,5 @@
 import Image from "next/image";
+import styles from "../../styles/Rating.module.css"
 
 function Details({ movieDetail }) {
 
@@ -25,11 +26,11 @@ function Details({ movieDetail }) {
   return (
     <>
       <section className="mh-100 bg-dark text-light mt-4 pt-5">
-        <div className="container h-auto px-2 bg-dark text-light">
+        <div className="container h-auto px-2">
           <div className="row d-flex justify-content-center align-items-center h-100">
             <div className="col">
-              <div className="card card-registration my-2 text-light">
-                <div className="row g-0">
+              <div className="card card-registration my-2" style={{background: "#292B2F"}}>
+                <div className="row g-0 ">
                   <div className="col-xl-6 d-xl-block">
                     <Image
                       src={image}
@@ -40,7 +41,7 @@ function Details({ movieDetail }) {
                     />
                   </div>
                   <div className="col-xl-6 overflow-scroll-y">
-                    <div className="card-body  text-black">
+                    <div className="card-body  text-light">
                       <h2 className=" text-uppercase">{title}</h2>
                       <p className="text-muted">
                         <span>
@@ -52,15 +53,18 @@ function Details({ movieDetail }) {
                         <span>{runtimeStr}</span>
                       </p>
                       <p>
-                        Rating: <span>{imDbRating}</span>
+                        Rating:  <span className={styles.stars__outer}>
+                          <span className={styles.stars__inner} style={{width: `${imDbRating * 10}%`}}></span>
+                        </span>
                       </p>
                       <div className="col">
                         <h4>THE CAST</h4>
                         <div className="row">
                           {slicedActorList.map((star) => {
+                            if (star.image !== "https://imdb-api.com/images/original/nopicture.jpg")
                             return (
                               <div key={star.id} className="col mb-3">
-                                <Image
+                               <Image
                                   src={star.image}
                                   alt={star.image}
                                   width={100}
@@ -80,7 +84,7 @@ function Details({ movieDetail }) {
                       </div>
                       <div className="col">
                         <h3>SYNOPSIS</h3>
-                        <p className="text-muted" style={{ fontSize: "15px" }}>
+                        <p className="text-light" style={{ fontSize: "15px" }}>
                           {plot}
                         </p>
                       </div>

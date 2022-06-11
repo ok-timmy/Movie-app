@@ -1,4 +1,5 @@
 import Image from "next/image";
+import styles from "../../styles/Rating.module.css"
 
 function Details({ movieDetail }) {
 
@@ -54,12 +55,15 @@ const slicedActorList = actorList.slice(0, 5);
                         <span>{runtimeStr}</span>
                       </p>
                       <p className="text-light">
-                        Rating: <span>{imDbRating}</span>
+                        Rating:  <span className={styles.stars__outer}>
+                          <span className={styles.stars__inner} style={{width: `${imDbRating * 10}%`}}></span>
+                        </span>
                       </p>
                       <div className="col text-light">
                         <h4 className="text-light">THE CAST</h4>
                         <div className="row">
                           {slicedActorList.map((star) => {
+                            if (star.image !== "https://imdb-api.com/images/original/nopicture.jpg")
                             return (
                               <div key={star.id} className="col mb-3">
                                 <Image
