@@ -115,8 +115,8 @@ function MovieCard({ item, loggedInEmail }) {
         <div className="card-body">
           <h5 className="card-title">{item.fullTitle}</h5>
           <p className="card-text">{item.year}</p>
-          <Link href={`${router.pathname}/${item.title}&${item.id}`}>
-            <a className="btn btn-light">View Details</a>
+          <Link href={`${router.pathname}/${item.title}&${item.id}`} passHref>
+            <button className="btn btn-light" onClick={()=> router.push(`/${router.pathname}/${item.title}&${item.id}`)}>View Details</button>
           </Link>{" "}
           {isLoading && UsersWL !== [] ? (
             <Spinner />

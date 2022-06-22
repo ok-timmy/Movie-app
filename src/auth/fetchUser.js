@@ -3,8 +3,10 @@ import { collection, doc, getDoc, setDoc } from "firebase/firestore";
 
 export const adduser = async (n, e) => {
   const firstLetter = n.split(" ");
-  const firstLetters = 
-    firstLetter.length > 1 ? ` ${firstLetter[0][0]}${firstLetter[0][0]}` : ` ${firstLetter[0][0]}`.toUpperCase();
+  const firstLetters =
+    firstLetter.length > 1
+      ? ` ${firstLetter[0][0]}${firstLetter[1][0]}`
+      : ` ${firstLetter[0][0]}`.toUpperCase();
   await setDoc(doc(db, "users", e), {
     name: n,
     email: e,

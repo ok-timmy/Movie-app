@@ -1,9 +1,11 @@
 import Head from "next/head";
+import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import MovieCard from "../../Components/MovieCard";
 
 const Index = ({ movies }) => {
   const { items } = movies;
+  const router = useRouter()
 
   const [loggedInEmail, setLoggedInEmail] = useState("");
   useEffect(() => {
@@ -14,7 +16,7 @@ const Index = ({ movies }) => {
       setLoggedInEmail(activeU.email);
     }
     // console.log(activeUser);
-  }, []);
+  }, [router.pathname]);
 
   return (
     <>
