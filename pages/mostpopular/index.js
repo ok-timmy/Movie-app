@@ -4,13 +4,15 @@ import { useEffect, useState } from "react";
 import MovieCard from "../../Components/MovieCard";
 
 const Index = ({ movies }) => {
-  const { items } = movies;
+  // const { items } = movies;
   const router = useRouter()
+  const [items, setItems] = useState()
 
   const [loggedInEmail, setLoggedInEmail] = useState("");
   useEffect(() => {
     const activeUser = sessionStorage.getItem("UserDatabase");
     const activeU = JSON.parse(activeUser);
+    setItems(movies.items);
     // console.log(activeU);
     if (activeUser) {
       setLoggedInEmail(activeU.email);
@@ -34,7 +36,7 @@ const Index = ({ movies }) => {
 
         <div className="container mt-5 mx-auto">
           <div className="row mx-auto">
-            {items.map((item) => {
+            {items && items.map((item) => {
               return <MovieCard item={item} key={item.id} loggedInEmail={loggedInEmail} />;
             })}
           </div>

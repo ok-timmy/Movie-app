@@ -165,18 +165,22 @@ const Spinner = styled.div`
   }
 `;
 
-function Header({ navBarLinks }) {
+function Header({navBarLinks}) {
   const [active, setActive] = useState();
   const [tokenExist, setTokenExist] = useState(false);
   const [LoggedInUser, setLoggedInUser] = useState(null);
   const { userData, logout, setData } = useContext(userContext);
   const [isLoading, setIsLoading] = useState(true);
   const [isMobileNav, setIsMobileNav] = useState(false);
+  
+  // navBarLinks
+  // console.log(navBarLinks);
 
   const router = useRouter();
 
-  const pathname = router.pathname;
-  // console.log(pathname);
+  let pathname = router.pathname;
+  
+  console.log(pathname);
 
   const node = useRef();
 
@@ -189,6 +193,7 @@ function Header({ navBarLinks }) {
   useEffect(() => {
     setActive(pathname);
   }, [pathname]);
+  console.log(active);
 
   useEffect(() => {
     const token = sessionStorage.getItem("Token");
@@ -224,7 +229,7 @@ function Header({ navBarLinks }) {
             {navBarLinks.map((navBarLink) => {
               return (
                 <NavLinks key={navBarLink.name}>
-                  {active === navBarLink.link ? (
+                  {active === `/${navBarLink.link}` ? (
                     <i
                       className={navBarLink.filled}
                       style={{ color: "#3F84E5" }}
@@ -235,12 +240,12 @@ function Header({ navBarLinks }) {
                       style={{ color: "#3F84E5" }}
                     ></i>
                   )}
-                  <Link href={{pathname: `${navBarLink.link}`}}>
+                  <Link href={`/${navBarLink.link}`} passHref>
                     <a
                       className="nav-link"
                       style={{ color: "#3F84E5" }}
-                      onClick={() => {setActive(navBarLink.link)
-                    
+                      onClick={() => {setActive(`/${navBarLink.link}`)
+                    router.push(`/${navBarLink.link}`)
                       }}
                     >
                       {navBarLink.name}
@@ -283,7 +288,7 @@ function Header({ navBarLinks }) {
                   <Link href="/account/profile" passHref>
                     
                       <User onClick={() => setActive()}>
-                        {LoggedInUser.name.split(" ")[0][0]}
+                        {LoggedInUser && LoggedInUser.name.split(" ")[0][0]}
                       </User>
                     
                   </Link>
@@ -315,7 +320,7 @@ function Header({ navBarLinks }) {
                 <Link href="/account/profile" passHref>
                   <a>
                     <User onClick={() => setActive()}>
-                      {LoggedInUser.name.split(" ")[0][0]}
+                      {LoggedInUser && LoggedInUser.name.split(" ")[0][0]}
                     </User>
                   </a>
                 </Link>
@@ -343,7 +348,7 @@ function Header({ navBarLinks }) {
         {navBarLinks.map((navBarLink) => {
           return (
             <MobileLink key={navBarLink.name}>
-              {active === navBarLink.link ? (
+              {active === `/${navBarLink.link}` ? (
                 <i
                   className={navBarLink.filled}
                   style={{ color: "#3F84E5" }}
@@ -354,10 +359,10 @@ function Header({ navBarLinks }) {
                   style={{ color: "#3F84E5" }}
                 ></i>
               )}
-              <Link href={navBarLink.link} passHref>
+              <Link href={`/${navBarLink.link}`} passHref>
                 <a
                   className="nav-link"
-                  onClick={() => setActive(navBarLink.link)}
+                  onClick={() => setActive(`/${navBarLink.link}`)}
                   style={{ color: "#3F84E5" }}
                 >
                   {navBarLink.name}

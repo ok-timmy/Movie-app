@@ -5,13 +5,15 @@ import MovieCard from "../../Components/MovieCard";
 
 const Index = ({ movies }) => {
   const [loggedInEmail, setLoggedInEmail] = useState("");
-  const { items } = movies;
-
+  const [items, setItems] = useState()
+  // const { items } = movies;
+// console.log(movies);
   const router = useRouter()
 
   useEffect(() => {
     const activeUser = sessionStorage.getItem("UserDatabase");
     const activeU = JSON.parse(activeUser);
+    setItems(movies.items);
     // console.log(activeU);
     if (activeUser) {
       setLoggedInEmail(activeU.email);
@@ -19,7 +21,8 @@ const Index = ({ movies }) => {
     // console.log(activeUser);
   }, [router.pathname]);
 
-  console.log(loggedInEmail);
+  // console.log(loggedInEmail);
+  console.log(items);
 
   return (
     <>
@@ -37,7 +40,7 @@ const Index = ({ movies }) => {
 
         <div className="container mt-5 mx-auto">
           <div className="row mx-auto">
-            {items.map((item) => {
+            {items && items.map((item) => {
               return <MovieCard item={item} key={item.id} loggedInEmail={loggedInEmail}/>;
             })}
           </div>
