@@ -16,7 +16,7 @@ const HeaderWrapper = styled.div`
   justify-content: center;
 
   @media screen and (max-width: 960px) {
-    height: 8vh;
+    height: 14vh;
   }
   @media screen and (max-width: 600px) {
     height: 10vh;
@@ -64,6 +64,10 @@ const NavLinks = styled.li`
 
   :hover {
     border-bottom: 1px solid #00a0f6;
+  }
+
+  @media screen and (max-width: 960px) {
+    font-size: 0.75rem;
   }
 
   @media screen and (max-width: 600px) {

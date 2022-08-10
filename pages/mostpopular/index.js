@@ -7,9 +7,11 @@ const Index = ({ movies }) => {
   // const { items } = movies;
   const router = useRouter()
   const [items, setItems] = useState()
+  const roouter = useRouter()
 
   const [loggedInEmail, setLoggedInEmail] = useState("");
   useEffect(() => {
+    router.reload();
     const activeUser = sessionStorage.getItem("UserDatabase");
     const activeU = JSON.parse(activeUser);
     setItems(movies.items);
@@ -46,7 +48,6 @@ const Index = ({ movies }) => {
   );
 };
 
-export default Index;
 
 export async function getStaticProps() {
   const resp = await fetch(
@@ -59,3 +60,5 @@ export async function getStaticProps() {
     props: { movies: data },
   };
 }
+
+  export default Index;
