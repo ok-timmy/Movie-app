@@ -1,5 +1,5 @@
 import { useState } from "react";
-import userContext from "../Context/context";
+import userContext from "./context";
 import { GetUserData } from "../src/auth/fetchUser";
 
 export function ContextWrapper ({children}) {

@@ -8,9 +8,16 @@ import {
 } from "firebase/auth";
 import { collection, doc, setDoc } from "firebase/firestore";
 import { adduser, GetUserData } from "./fetchUser";
+import { useRouter } from "next/router";
+import  userContext from "../../Context/context"
+import { useContext } from "react";
+
+const provider = new GoogleAuthProvider();
+  const auth = getAuth();
+  
 
 export function SignInWithEmail(_email, _password, router, login) {
-  const auth = getAuth();
+  // const auth = getAuth();
   signInWithEmailAndPassword(auth, _email, _password)
     .then(async (userCredential) => {
       // Signed in
@@ -28,7 +35,7 @@ export function SignInWithEmail(_email, _password, router, login) {
 }
 
 export function SignUpWithEmail(_name, _email, _password, router) {
-  const auth = getAuth();
+  // const auth = getAuth();
   createUserWithEmailAndPassword(auth, _email, _password)
     .then((userCredential) => {
       // Signed in
@@ -45,13 +52,12 @@ export function SignUpWithEmail(_name, _email, _password, router) {
     });
 }
 
-export function SignedUpWithGoogle(router, login) {
-  const provider = new GoogleAuthProvider();
-  const auth = getAuth();
-
-  signInWithPopup(auth, provider)
-    .then(async (result) => {
-      // console.log(auth);
+export async function SignedUpWithGoogle(router, login) {
+  // const router = useRouter();
+  // const {login} = useContext(userContext);
+  
+   await signInWithPopup(auth, provider)
+    .then( (result) => {
       // This gives you a Google Access Token. You can use it to access the Google API.
       const credential = GoogleAuthProvider.credentialFromResult(result);
       const token = credential.accessToken;
@@ -59,9 +65,10 @@ export function SignedUpWithGoogle(router, login) {
       const user = result.user;
       // console.log(token);
       console.log(user);
-      const userDatabase = await GetUserData(user);
-      await login(user, userDatabase, token);
-      router.back();
+      const userDatabase =  GetUserData(user);
+      // return user;
+      login(user, userDatabase, token);
+      router.push("/account/profile");
     })
     .catch((error) => {
       // Handle Errors here.

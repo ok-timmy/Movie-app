@@ -85,7 +85,7 @@ function SignIn() {
                     <button
                       type="button"
                       className="btn btn-light"
-                      onClick={() => SignedUpWithGoogle(router.push('/account/profile'), login)}
+                      onClick={() => SignedUpWithGoogle(router, login)}
                     >
                       <span className="px-3">Continue With Google</span>
                       <i className="bi bi-google" style={{ color: "red" }}></i>

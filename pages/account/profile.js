@@ -134,6 +134,7 @@ const Spinner = styled.div`
 `;
 
 function Profile() {
+  const {userData} = useContext(userContext);
   const [user, setUser] = useState();
   const [isLoading, setIsLoading] = useState(true);
 
@@ -145,10 +146,10 @@ function Profile() {
   const myuser = JSON.parse(sessionUser);
   // console.log(sessionUser);
   setUser(myuser);
+  // console.log(user.profilePicture);
   setIsLoading(false);
- }, [user])
+ }, [userData])
  
-  // console.log(user);
 
   return (
     <>{
@@ -156,7 +157,7 @@ function Profile() {
       <ProfilePage>
         <ProfileDetails className="bg-dark rounded shadow">
           <ProfilePicture>
-           {user && <User>{user.profilePicture}</User>}
+           {user && <User>{user.name.split(" ")[0][0]}</User>}
           </ProfilePicture>
          {user && <ProfileInfo>{user.name}</ProfileInfo>}
          {user && <ProfileEmail>{user.email}</ProfileEmail>}

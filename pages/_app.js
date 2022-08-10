@@ -4,7 +4,7 @@ import Footer from "../Components/Footer";
 import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import Script from "next/script";
-import { ContextWrapper } from "../Components/ContextWrapper";
+import { ContextWrapper } from "../Context/ContextWrapper";
 import { navBarLinks } from "../Components/NavLinks";
 
 function MyApp({ Component, pageProps }) {

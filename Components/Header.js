@@ -283,7 +283,7 @@ function Header({ navBarLinks }) {
                   <Link href="/account/profile" passHref>
                     
                       <User onClick={() => setActive()}>
-                        {LoggedInUser.profilePicture}
+                        {LoggedInUser.name.split(" ")[0][0]}
                       </User>
                     
                   </Link>
@@ -315,7 +315,7 @@ function Header({ navBarLinks }) {
                 <Link href="/account/profile" passHref>
                   <a>
                     <User onClick={() => setActive()}>
-                      {LoggedInUser.profilePicture}
+                      {LoggedInUser.name.split(" ")[0][0]}
                     </User>
                   </a>
                 </Link>
