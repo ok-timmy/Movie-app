@@ -6,25 +6,35 @@ import userContext from "../../Context/context";
 import Empty from "../../public/Empty-cuate.png";
 
 const ProfilePage = styled.div`
-  padding: 4rem 15% 2rem;
+  // padding: 1rem 3rem 2rem;
+  display: flex;
+  flex-direction: column;
   min-height: 90vh;
-  margin: 0 auto ;
+  width: 100vw;
+  margin: auto ;
   background: black;
   color: white;
+  overflow-x: hidden;
 
   @media only screen and (max-width: 600px) {
     width: 100vw;
+    padding: 1rem 1rem 2rem;
   }
 `;
 
 const ProfileDetails = styled.div`
   position: relative;
-  margin-top: 10rem;
+  margin: 6rem auto 0;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
   min-height: 30vh;
+  min-width: 90vw;
+
+  @media only screen and (max-width: 600px) {
+    // padding: 6rem 1rem 0;
+  }
 `;
 
 const ProfileEmail = styled.div`
@@ -34,9 +44,9 @@ padding-bottom: 10px;
 `
 
 const ProfilePicture = styled.div`
-  margin:auto;
-  width: 70px;
-  height: 70px;
+  margin: 1rem auto;
+  width: 100px;
+  height: 100px;
   background: #0081CF;
   border-radius: 50%;
   display: flex;
@@ -51,7 +61,7 @@ const ProfilePicture = styled.div`
 
 const User = styled.span`
   color: white;
-  font-size: 2rem;
+  font-size: 4rem;
 `;
 
 const ProfileInfo = styled.div`
@@ -62,7 +72,8 @@ const ProfileInfo = styled.div`
 
 const FavouriteMovies = styled.div`
   align-items: center;
-  margin-top: 2rem;
+  margin: 2rem auto 3rem;
+  min-width: 90vw;
   min-height: 20vh;
   @media only screen and (max-width: 600px) {
   height: auto;
@@ -100,14 +111,19 @@ const EmptyList = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
+  
+  @media only screen and (max-width: 600px) {
+   margin: auto;
+   height: 40vh;
+  }
 `;
 
 const Photo = styled.div`
   width: 200px;
   height: 200px;
-  margin: 0 auto;
+  margin: auto;
   @media only screen and (max-width: 600px) {
-    width: 400px;
+    width: 200px;
     height: 400px;
   }
 `;

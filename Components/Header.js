@@ -372,7 +372,7 @@ function Header({navBarLinks}) {
           );
         })}
         {LoggedInUser && (
-          <Button onClick={() => logout(push("/"))}>Sign out</Button>
+          <Button onClick={() => logout(router.push("/"))}>Sign out</Button>
         )}
       </MobileNav>
     </>

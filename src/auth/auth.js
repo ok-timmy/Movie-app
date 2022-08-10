@@ -9,12 +9,11 @@ import {
 import { collection, doc, setDoc } from "firebase/firestore";
 import { adduser, GetUserData } from "./fetchUser";
 import { useRouter } from "next/router";
-import  userContext from "../../Context/context"
+import userContext from "../../Context/context";
 import { useContext } from "react";
 
 const provider = new GoogleAuthProvider();
-  const auth = getAuth();
-  
+const auth = getAuth();
 
 export function SignInWithEmail(_email, _password, router, login) {
   // const auth = getAuth();
@@ -37,11 +36,11 @@ export function SignInWithEmail(_email, _password, router, login) {
 export function SignUpWithEmail(_name, _email, _password, router) {
   // const auth = getAuth();
   createUserWithEmailAndPassword(auth, _email, _password)
-    .then((userCredential) => {
+    .then(async (userCredential) => {
       // Signed in
       // const user = userCredential.user;
       console.log(userCredential);
-      adduser(_name, _email); // Create a new Document for the new user to the database
+      await adduser(_name, _email); // Create a new Document for the new user to the database
       router.push("/account/sign-in");
     })
     .catch((error) => {
@@ -55,9 +54,9 @@ export function SignUpWithEmail(_name, _email, _password, router) {
 export async function SignedUpWithGoogle(router, login) {
   // const router = useRouter();
   // const {login} = useContext(userContext);
-  
-   await signInWithPopup(auth, provider)
-    .then( (result) => {
+
+  await signInWithPopup(auth, provider)
+    .then(async (result) => {
       // This gives you a Google Access Token. You can use it to access the Google API.
       const credential = GoogleAuthProvider.credentialFromResult(result);
       const token = credential.accessToken;
@@ -65,7 +64,7 @@ export async function SignedUpWithGoogle(router, login) {
       const user = result.user;
       // console.log(token);
       console.log(user);
-      const userDatabase =  GetUserData(user);
+      const userDatabase = await GetUserData(user);
       // return user;
       login(user, userDatabase, token);
       router.push("/account/profile");
