@@ -39,8 +39,7 @@ function MovieCard({ item, loggedInEmail }) {
       ssWL.favouriteMovies !== [] && setUsersWL(ssWL.favouritesMovies);
       // console.log(UsersWL);
       setIsLoading(false);
-    }
-    else {
+    } else {
       setUsersWL([]);
       setIsLoading(false);
     }
@@ -54,7 +53,7 @@ function MovieCard({ item, loggedInEmail }) {
           // setIsSelected(true);
           isFound = (
             <button
-            className="btn btn-light"
+              className="btn btn-light"
               onClick={() => {
                 removeFromWatchList(
                   item,
@@ -70,7 +69,7 @@ function MovieCard({ item, loggedInEmail }) {
           // setIsSelected(false)
           isFound = (
             <button
-            className="btn btn-light"
+              className="btn btn-light"
               onClick={() => {
                 addToWatchList(
                   item,
@@ -88,7 +87,7 @@ function MovieCard({ item, loggedInEmail }) {
     } else {
       isFound = (
         <button
-        className="btn btn-light"
+          className="btn btn-light"
           onClick={() => {
             addToWatchList(item, loggedInEmail, router);
           }}
@@ -103,7 +102,10 @@ function MovieCard({ item, loggedInEmail }) {
 
   return (
     <div className="col">
-      <div className="card mb-5 shadow rounded bg-dark" style={{ width: "20rem", height: "25rem" }}>
+      <div
+        className="card mb-5 shadow rounded bg-dark"
+        style={{ width: "20rem", height: "25rem" }}
+      >
         <Image
           responsive={"100vw"}
           src={item.image}
@@ -115,8 +117,18 @@ function MovieCard({ item, loggedInEmail }) {
         <div className="card-body">
           <h5 className="card-title">{item.fullTitle}</h5>
           <p className="card-text">{item.year}</p>
-          <Link href={`${router.pathname.slice(1)}/${item.title}&${item.id}`} passHref>
-            <button className="btn btn-light" onClick={()=> router.push(`/${router.pathname}/${item.title}&${item.id}`)}>View Details</button>
+          <Link
+            href={`${router.pathname.slice(1)}/${item.title}&${item.id}`}
+            onClick={() =>
+              router.push(`${router.pathname}/${item.title}&${item.id}`)
+            }
+            passHref
+          >
+            <button
+              className="btn btn-light"
+            >
+              View Details
+            </button>
           </Link>{" "}
           {isLoading && UsersWL !== [] ? (
             <Spinner />

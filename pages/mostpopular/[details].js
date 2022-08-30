@@ -2,6 +2,7 @@ import Image from "next/image";
 import styles from "../../styles/Rating.module.css"
 
 function Details({ movieDetail }) {
+  console.log(movieDetail)
 
 const {
   title,
@@ -133,9 +134,54 @@ const slicedActorList = actorList.slice(0, 5);
       </section>
     </>
   );
+
 }
 
 export default Details;
+
+// export async function getStaticPaths() {
+//   const resp = await fetch(
+//     "https://imdb-api.com/en/API/MostPopularMovies/k_5cpyi6x9"
+//   );
+//   const { items } = await resp.json();
+//   // console.log(items);
+
+//   const paths = items.map((item) => {
+//     // console.log(params)
+//     return {
+//       params: {
+//         details: `${item.title}`,
+//         id: `${item.id}`
+//         // id : `${item.id}`,
+//         // title : `${item.title}`
+//       },
+//     };
+//   });
+// console.log(paths);
+//   return {
+//     paths,
+//     fallback: true,
+//   };
+// }
+
+// export async function getStaticProps(context) {
+//   const { params } = context;
+//   // const param = JSON.parse(params.details)
+//   // console.log(params);
+//   const {details} = params;
+//   console.log(details);
+//   const detailsArray = details.split("&")[1];
+//   const response = await fetch(
+//     `https://imdb-api.com/en/API/Title/k_5cpyi6x9/${detailsArray}`)
+//   const data = await response.json();
+//   console.log(data);
+
+//   return {
+//     props: {
+//       movieDetail: data,
+//     },
+//   };
+// }
 
 export async function getServerSideProps(context) {
   const pros = context.params;

@@ -196,6 +196,7 @@ function Header({navBarLinks}) {
 
   useEffect(() => {
     setActive(pathname);
+  //  router.reload();
   }, [pathname]);
   console.log(active);
 
