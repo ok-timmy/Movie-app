@@ -182,9 +182,9 @@ function Header({navBarLinks}) {
 
   const router = useRouter();
 
-  let pathname = router.pathname;
+  // let pathname = router.pathname;
   
-  console.log(pathname);
+  // console.log(pathname);
 
   const node = useRef();
 
@@ -194,11 +194,11 @@ function Header({navBarLinks}) {
     } else setIsMobileNav(false);
   }, [isMobileNav]);
 
-  useEffect(() => {
-    setActive(pathname);
-  //  router.reload();
-  }, [pathname]);
-  console.log(active);
+  // useEffect(() => {
+  //   setActive(pathname);
+  // //  router.reload();
+  // }, [pathname]);
+  // console.log(active);
 
   useEffect(() => {
     const token = sessionStorage.getItem("Token");
@@ -367,7 +367,7 @@ function Header({navBarLinks}) {
               <Link href={`/${navBarLink.link}`} passHref>
                 <a
                   className="nav-link"
-                  onClick={() => setActive(`/${navBarLink.link}`)}
+                  // onClick={() => setActive(`/${navBarLink.link}`)}
                   style={{ color: "#3F84E5" }}
                 >
                   {navBarLink.name}

@@ -139,30 +139,30 @@ function Details({ movieDetail }) {
 
 export default Details;
 
-export async function getStaticPaths() {
-  const resp = await fetch(
-    "https://imdb-api.com/en/API/MostPopularMovies/k_5cpyi6x9"
-  );
-  const { items } = await resp.json();
-  // console.log(items);
+// export async function getStaticPaths() {
+//   const resp = await fetch(
+//     "https://imdb-api.com/en/API/MostPopularMovies/k_5cpyi6x9"
+//   );
+//   const { items } = await resp.json();
+//   // console.log(items);
 
-  const paths = items.map((item) => {
-    console.log(item)
-    return {
-      // params: {
-      //   details: `${item.title}/k_5cpyi6x9/${item.id}`,
-      //   id: `${item.id}`
-      //   // id : `${item.id}`,
-      //   // title : `${item.title}`
-      // },
-    };
-  });
-// console.log(paths);
-  return {
-    paths,
-    fallback: true,
-  };
-}
+//   const paths = items.map((item) => {
+//     console.log(item)
+//     return {
+//       // params: {
+//       //   details: `${item.title}/k_5cpyi6x9/${item.id}`,
+//       //   id: `${item.id}`
+//       //   // id : `${item.id}`,
+//       //   // title : `${item.title}`
+//       // },
+//     };
+//   });
+// // console.log(paths);
+//   return {
+//     paths,
+//     fallback: true,
+//   };
+// }
 
 export async function getServerSideProps(context) {
   const { params } = context;

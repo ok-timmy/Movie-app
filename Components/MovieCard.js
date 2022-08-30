@@ -117,19 +117,19 @@ function MovieCard({ item, loggedInEmail }) {
         <div className="card-body">
           <h5 className="card-title">{item.fullTitle}</h5>
           <p className="card-text">{item.year}</p>
-          <Link
+          {/* <Link
             href={`${router.pathname.slice(1)}/${item.title}&${item.id}`}
+            passHref
+            > */}
+            <button
             onClick={() =>
               router.push(`${router.pathname}/${item.title}&${item.id}`)
             }
-            passHref
-          >
-            <button
               className="btn btn-light"
             >
               View Details
             </button>
-          </Link>{" "}
+          {/* </Link>{" "} */}
           {isLoading && UsersWL !== [] ? (
             <Spinner />
           ) : (

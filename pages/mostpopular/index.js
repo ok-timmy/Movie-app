@@ -1,15 +1,15 @@
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
+import InfiniteScroll from "react-infinite-scroll-component";
 import MovieCard from "../../Components/MovieCard";
 
 const Index = ({ movies }) => {
   // const { items } = movies;
   const router = useRouter()
   const [items, setItems] = useState()
-  const roouter = useRouter()
-
   const [loggedInEmail, setLoggedInEmail] = useState("");
+
   useEffect(() => {
     const activeUser = sessionStorage.getItem("UserDatabase");
     const activeU = JSON.parse(activeUser);
@@ -37,9 +37,18 @@ const Index = ({ movies }) => {
 
         <div className="container mt-5 mx-auto">
           <div className="row mx-auto">
+            <InfiniteScroll
+             dataLength={items.length}
+             next={fetchMoreData}
+             style={{ display: 'flex', flexDirection: 'column-reverse' }} //To put endMessage and loader to the top.
+             inverse={true} //
+             hasMore={true}
+             loader={<h4>Loading...</h4>}
+            >
             {items && items.map((item) => {
               return <MovieCard item={item} key={item.id} loggedInEmail={loggedInEmail} />;
             })}
+            </InfiniteScroll>
           </div>
         </div>
       </div>

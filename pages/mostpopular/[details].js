@@ -184,9 +184,9 @@ export default Details;
 // }
 
 export async function getServerSideProps(context) {
-  const pros = context.params;
-  const detail = pros.details
-  const usedDetail = detail.split("&")[1];
+  const {params} = context;
+  const {details} = params
+  const usedDetail = details.split("&")[1];
   // console.log(usedDetail);
   const resp = await fetch(
     `https://imdb-api.com/en/API/Title/k_5cpyi6x9/${usedDetail}`
