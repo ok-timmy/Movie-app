@@ -11,7 +11,6 @@ const Index = ({ movies }) => {
 
   const [loggedInEmail, setLoggedInEmail] = useState("");
   useEffect(() => {
-    router.reload();
     const activeUser = sessionStorage.getItem("UserDatabase");
     const activeU = JSON.parse(activeUser);
     setItems(movies.items);
