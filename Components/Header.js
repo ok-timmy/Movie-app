@@ -249,9 +249,10 @@ function Header({navBarLinks}) {
                     <a
                       className="nav-link"
                       style={{ color: "#3F84E5" }}
-                      onClick={() => {setActive(`/${navBarLink.link}`)
-                    router.push(`/${navBarLink.link}`)
-                      }}
+                      // onClick={() => {
+                        // setActive(`/${navBarLink.link}`)
+                    // router.push(`/${navBarLink.link}`)
+                      // }}
                     >
                       {navBarLink.name}
                     </a>
@@ -267,7 +268,7 @@ function Header({navBarLinks}) {
                 <Link href="/account/sign-in" passHref>
                   <a
                     className="text-decoration-none"
-                    onClick={() => setActive()}
+                    // onClick={() => setActive()}
                   >
                     Sign In
                   </a>
@@ -277,7 +278,7 @@ function Header({navBarLinks}) {
                 <Link href="/account/sign-up" passHref>
                   <a
                     className="text-decoration-none"
-                    onClick={() => setActive()}
+                    // onClick={() => setActive()}
                   >
                     Sign Up
                   </a>

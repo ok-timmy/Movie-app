@@ -37,18 +37,18 @@ const Index = ({ movies }) => {
 
         <div className="container mt-5 mx-auto">
           <div className="row mx-auto">
-            <InfiniteScroll
+            {/* <InfiniteScroll
              dataLength={items.length}
              next={fetchMoreData}
              style={{ display: 'flex', flexDirection: 'column-reverse' }} //To put endMessage and loader to the top.
              inverse={true} //
              hasMore={true}
              loader={<h4>Loading...</h4>}
-            >
+            > */}
             {items && items.map((item) => {
               return <MovieCard item={item} key={item.id} loggedInEmail={loggedInEmail} />;
             })}
-            </InfiniteScroll>
+            {/* </InfiniteScroll> */}
           </div>
         </div>
       </div>
