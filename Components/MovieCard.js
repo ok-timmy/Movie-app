@@ -92,7 +92,7 @@ function MovieCard({ item, loggedInEmail }) {
             addToWatchList(item, loggedInEmail, router);
           }}
         >
-          Add To Watchlist
+          <i className="bi bi-bookmark-plus"></i>
         </button>
       );
     }
