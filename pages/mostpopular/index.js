@@ -57,7 +57,7 @@ const Index = ({ movies }) => {
 };
 
 
-export async function getServerSideProps() {
+export async function getStaticProps() {
   const resp = await fetch(
     "https://imdb-api.com/en/API/MostPopularTVs/k_5cpyi6x9"
   );

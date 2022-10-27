@@ -49,7 +49,7 @@ const Index = ({ movies }) => {
 
 export default Index;
 
-export async function getServerSideProps() {
+export async function getStaticProps() {
   const resp = await fetch(
     "https://imdb-api.com/en/API/Top250Movies/k_5cpyi6x9"
   );
