@@ -62,7 +62,7 @@ function MovieCard({ item, loggedInEmail }) {
                 );
               }}
             >
-              Remove
+              <i className="bi bi-bookmark-check"></i>
             </button>
           );
         } else {
@@ -79,7 +79,7 @@ function MovieCard({ item, loggedInEmail }) {
                 );
               }}
             >
-              Add To Watchlist
+              <i className="bi bi-bookmark-plus"></i>
             </button>
           );
         }
@@ -125,9 +125,9 @@ function MovieCard({ item, loggedInEmail }) {
             onClick={() =>
               router.push(`${router.pathname}/${item.title}&${item.id}`)
             }
-              className="btn btn-light"
+              className="btn btn-light me-3"
             >
-              View Details
+              <i className="bi bi-info-circle"></i>
             </button>
           {/* </Link>{" "} */}
           {isLoading && UsersWL !== [] ? (

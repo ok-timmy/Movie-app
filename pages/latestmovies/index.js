@@ -4,8 +4,9 @@ import { useEffect, useState } from "react";
 import MovieCard from "../../Components/MovieCard";
 
 const Index = ({ movies }) => {
+  const { items } = movies;
+  
   const [loggedInEmail, setLoggedInEmail] = useState("");
-  const [items, setItems] = useState()
   // const { items } = movies;
 // console.log(movies);
   const router = useRouter()
@@ -59,7 +60,7 @@ export async function getStaticProps() {
     "https://imdb-api.com/en/API/MostPopularMovies/k_5cpyi6x9"
   );
   const data = await resp.json();
-  // console.log(data);
+  console.log(data);
 
   return {
     props: { movies: data },
