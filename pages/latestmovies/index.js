@@ -13,7 +13,9 @@ const Index = ({ movies }) => {
   useEffect(() => {
     const activeUser = sessionStorage.getItem("UserDatabase");
     const activeU = JSON.parse(activeUser);
-    setItems(movies.items);
+    // setItems(movies.items);
+
+    console.log(movies.items)
     // console.log(activeU);
     if (activeUser) {
       setLoggedInEmail(activeU.email);
@@ -52,7 +54,7 @@ const Index = ({ movies }) => {
 
 export default Index;
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
   const resp = await fetch(
     "https://imdb-api.com/en/API/MostPopularMovies/k_5cpyi6x9"
   );

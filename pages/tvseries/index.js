@@ -48,12 +48,12 @@ const Index = ({ movies }) => {
 
 export default Index;
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
   const resp = await fetch(
     "https://imdb-api.com/en/API/Top250TVs/k_5cpyi6x9"
   );
   const data = await resp.json();
-  // console.log(data);
+  console.log(data.items[9]);
 
   return {
     props: { movies: data },
